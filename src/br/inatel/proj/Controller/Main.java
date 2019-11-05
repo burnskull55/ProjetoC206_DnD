@@ -47,7 +47,9 @@ public class Main {
         3-Character methods
         4-monster methods
         5-npc methods
-        6-TODO rest of the list
+        6-class modeling
+        7-TODO
+        
         */
     }
     

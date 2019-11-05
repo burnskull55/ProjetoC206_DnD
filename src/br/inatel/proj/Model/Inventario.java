@@ -5,10 +5,17 @@
  */
 package br.inatel.proj.Model;
 
+import br.inatel.proj.Model.itens.Arma;
+import br.inatel.proj.Model.itens.Consumables;
+import br.inatel.proj.Model.itens.Pack;
+
 /**
  *
  * @author burns
  */
 class Inventario {
+    private Pack pack = new Pack();
+    private Consumables consumables = new Consumables();
+    private Arma arma = new Arma();
     
 }

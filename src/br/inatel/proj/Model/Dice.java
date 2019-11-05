@@ -5,13 +5,16 @@
  */
 package br.inatel.proj.Model;
 
+import java.util.Random;
+
 /**
  *
  * @author burns
  */
 public class Dice {
     private int sides;
-
+    private Random rand = new Random();
+    
     public int getSides() {
         return sides;
     }
@@ -20,6 +23,9 @@ public class Dice {
         this.sides = sides;
     }
     
+    public int roll(){
+        return rand.nextInt(sides);
+    }
     
     
 }
