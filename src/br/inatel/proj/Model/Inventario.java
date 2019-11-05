@@ -17,5 +17,39 @@ class Inventario {
     private Pack pack = new Pack();
     private Consumables consumables = new Consumables();
     private Arma arma = new Arma();
+
+    @Override
+    public String toString() {
+        return "Inventario: \n"
+                + arma.toString() + consumables.toString();
+    }
+    
+    
+    public Pack getPack() {
+        return pack;
+    }
+
+    public void setPack(Pack pack) {
+        this.pack = pack;
+    }
+
+    public Consumables getConsumables() {
+        return consumables;
+    }
+
+    public void setConsumables(Consumables consumables) {
+        this.consumables = consumables;
+    }
+
+    public Arma getArma() {
+        return arma;
+    }
+
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    
+    
     
 }

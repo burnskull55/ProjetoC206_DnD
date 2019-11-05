@@ -5,12 +5,23 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.Arquivo;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author burns
  */
 public class Login extends javax.swing.JFrame {
 
+    private String[] linha = new String[1000];
+    
     /**
      * Creates new form Login
      */
@@ -52,9 +63,19 @@ public class Login extends javax.swing.JFrame {
 
         btn_novoUser.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_novoUser.setText("Novo Usuario");
+        btn_novoUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_novoUserActionPerformed(evt);
+            }
+        });
 
         btn_login.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_login.setText("Entrar");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -125,6 +146,14 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_novoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoUserActionPerformed
+        novoUsuario();
+    }//GEN-LAST:event_btn_novoUserActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        entrar();
+    }//GEN-LAST:event_btn_loginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -170,4 +199,86 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        this.txt_usuario.setText("");
+        this.txt_senha.setText("");
+    }
+    private void entrar() {
+        lerDados();
+    }
+    
+    private void novoUsuario() {
+        Cadastro c = new Cadastro();
+        c.setVisible(true);
+        this.dispose();
+    }
+
+    private void lerDados() {
+        InputStream fluxoEntrada;               // Fluxo de entrada
+        InputStreamReader leitorFluxoEntrada;   // Leitor do fluxo de entrada
+        BufferedReader bufferEntrada = null;    // Buffer da entrada
+        int i = 0;
+
+        try {
+            fluxoEntrada = new FileInputStream("usuarios.txt");
+            leitorFluxoEntrada = new InputStreamReader(fluxoEntrada);
+            bufferEntrada = new BufferedReader(leitorFluxoEntrada);
+            linha[0] = bufferEntrada.readLine();
+            i++;
+            while (i != 1000) {
+                linha[i] = bufferEntrada.readLine();
+                i++;
+            }
+
+            // Tratamento de Erros
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Nenhum usuário cadastrado !", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Nenhum usuário cadastrado !", "Erro", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Sempre fechar o arquivo após ler/gravar !!
+            try {
+                bufferEntrada.close();      // Fecha o arquivo
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao consultar arquivo !", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        verificacao();
+
+    }
+
+    private void verificacao() {
+        String user = txt_usuario.getText();
+        String pass = txt_senha.getText();
+        boolean flag = false;
+
+        for (int j = 0; j < 1000; j++) {
+
+            if (linha[j + 1] == null) {
+                break;
+            }
+            if (user.equals(linha[j]) && pass.equals(linha[j + 1])) {
+                // Aprovado
+                Arquivo.nomeUsuario = user;
+                TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
+                telaPrincipal.setVisible(true);     // Chama a tela de menu
+                this.dispose();
+                flag = true;
+            } 
+        }
+        if (!flag) {
+            // Caso esteja errado emite um Erro
+            String msg = "Usuario e/ou senha inválidos!";
+            String title = "Erro ao efetuar login!";
+            int msgType = JOptionPane.ERROR_MESSAGE;
+            
+            JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
+
+            // Limpa os campos de texto
+            limparCampos();
+        }
+        
+    }
 }

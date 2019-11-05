@@ -49,6 +49,8 @@ public class Main {
         5-npc methods
         6-class modeling
         7-TODO
+        //criar a funçao de criar um personagem , que vai colocar todas as partes do char 
+        criar a funçao de add char , que vai permitir o imput manual de cada aspecto do char
         
         */
     }

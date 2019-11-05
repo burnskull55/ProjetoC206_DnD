@@ -12,6 +12,7 @@ import java.util.Random;
  * @author burns
  */
 public class Dice {
+    private int num;
     private int sides;
     private Random rand = new Random();
     
@@ -25,6 +26,20 @@ public class Dice {
     
     public int roll(){
         return rand.nextInt(sides);
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+    
+
+    @Override
+    public String toString() {
+        return num +" D"+sides;
     }
     
     

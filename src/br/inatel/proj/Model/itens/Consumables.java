@@ -5,10 +5,36 @@
  */
 package br.inatel.proj.Model.itens;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author burns
  */
 public class Consumables {
+    private ArrayList<String> bag = new ArrayList();
+
+    @Override
+    public String toString() {
+        String aux = null;
+        
+        for (String string : bag) {
+            aux = aux +string+"\n";
+        }
+        return aux;
+    }
+
+   
+    
+    public ArrayList<String> getBag() {
+        return bag;
+    }
+
+    public void setBag(ArrayList<String> bag) {
+        this.bag = bag;
+    }
+    
+    
+    
     
 }

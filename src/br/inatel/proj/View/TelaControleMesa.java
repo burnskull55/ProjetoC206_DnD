@@ -33,6 +33,10 @@ public class TelaControleMesa extends javax.swing.JFrame {
         btn_npcs = new javax.swing.JButton();
         btn_combate = new javax.swing.JButton();
         lbl_imagem = new javax.swing.JLabel();
+        lbl_npcounter = new javax.swing.JLabel();
+        lbl_charcounter1 = new javax.swing.JLabel();
+        lbl_monstercounter = new javax.swing.JLabel();
+        lbl_charcounter3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +56,14 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
         lbl_imagem.setText("imagem placeholder");
 
+        lbl_npcounter.setText("npc counter");
+
+        lbl_charcounter1.setText("player counter");
+
+        lbl_monstercounter.setText("monster counter");
+
+        lbl_charcounter3.setText("contador de char");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -60,16 +72,27 @@ public class TelaControleMesa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_combate)
-                            .addComponent(btn_npcs)
-                            .addComponent(btn_monstros))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_personagens)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                        .addComponent(lbl_imagem)))
+                        .addComponent(lbl_imagem))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_combate)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_npcs)
+                                    .addComponent(btn_monstros))
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_monstercounter)
+                                    .addComponent(lbl_npcounter)
+                                    .addComponent(lbl_charcounter1))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_charcounter3)
+                .addGap(124, 124, 124))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,14 +100,21 @@ public class TelaControleMesa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_personagens)
-                    .addComponent(lbl_imagem))
+                    .addComponent(lbl_imagem)
+                    .addComponent(lbl_charcounter1))
                 .addGap(11, 11, 11)
-                .addComponent(btn_npcs)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_npcs)
+                    .addComponent(lbl_npcounter))
                 .addGap(11, 11, 11)
-                .addComponent(btn_monstros)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_monstros)
+                    .addComponent(lbl_monstercounter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_combate)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lbl_charcounter3)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,6 +178,10 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private javax.swing.JButton btn_npcs;
     private javax.swing.JButton btn_personagens;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_charcounter1;
+    private javax.swing.JLabel lbl_charcounter3;
     private javax.swing.JLabel lbl_imagem;
+    private javax.swing.JLabel lbl_monstercounter;
+    private javax.swing.JLabel lbl_npcounter;
     // End of variables declaration//GEN-END:variables
 }

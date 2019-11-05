@@ -59,20 +59,35 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btn_combate" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_npcs" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_monstros" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Component id="btn_personagens" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="136" max="32767" attributes="0"/>
                           <Component id="lbl_imagem" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btn_combate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btn_npcs" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_monstros" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbl_monstercounter" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_npcounter" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_charcounter1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lbl_charcounter3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,14 +98,23 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_personagens" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_imagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_charcounter1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Component id="btn_npcs" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btn_npcs" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_npcounter" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  <Component id="btn_monstros" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btn_monstros" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_monstercounter" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btn_combate" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="100" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lbl_charcounter3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="67" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,6 +155,26 @@
         <Component class="javax.swing.JLabel" name="lbl_imagem">
           <Properties>
             <Property name="text" type="java.lang.String" value="imagem placeholder"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_npcounter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="npc counter"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_charcounter1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="player counter"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_monstercounter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="monster counter"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_charcounter3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="contador de char"/>
           </Properties>
         </Component>
       </SubComponents>
