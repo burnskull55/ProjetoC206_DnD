@@ -33,23 +33,53 @@ public class TelaPersonagens extends javax.swing.JFrame {
         lbl_imgPersonagens = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        btn_selectChar = new javax.swing.JButton();
+        btn_Addchar = new javax.swing.JButton();
+        btn_criarchar = new javax.swing.JButton();
+        btn_showChar = new javax.swing.JButton();
+        btn_showCombat = new javax.swing.JButton();
+        btn_showAtributes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personagens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
+        jList1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
-        lbl_imgPersonagens.setText("jLabel1");
+        lbl_imgPersonagens.setText("img placeholder");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
+
+        btn_selectChar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_selectChar.setText("Selecionar");
+
+        btn_Addchar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_Addchar.setText("Adicionar Personagem");
+
+        btn_criarchar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_criarchar.setText("Criar Personagem");
+
+        btn_showChar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_showChar.setText("Info Ceral");
+
+        btn_showCombat.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_showCombat.setText("Info Combate");
+
+        btn_showAtributes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_showAtributes.setText("Info Atributos");
+        btn_showAtributes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_showAtributesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -58,10 +88,19 @@ public class TelaPersonagens extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_imgPersonagens)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_selectChar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_showAtributes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_showCombat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_showChar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_criarchar)
+                    .addComponent(btn_Addchar)
+                    .addComponent(lbl_imgPersonagens))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -71,10 +110,24 @@ public class TelaPersonagens extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_showChar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_showCombat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_showAtributes)
+                                .addGap(12, 12, 12))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btn_selectChar)
+                        .addGap(37, 37, 37)
                         .addComponent(lbl_imgPersonagens)
-                        .addGap(0, 143, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(btn_Addchar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_criarchar)))
                 .addContainerGap())
         );
 
@@ -97,6 +150,10 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_showAtributesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showAtributesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_showAtributesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +191,12 @@ public class TelaPersonagens extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Addchar;
+    private javax.swing.JButton btn_criarchar;
+    private javax.swing.JButton btn_selectChar;
+    private javax.swing.JButton btn_showAtributes;
+    private javax.swing.JButton btn_showChar;
+    private javax.swing.JButton btn_showCombat;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

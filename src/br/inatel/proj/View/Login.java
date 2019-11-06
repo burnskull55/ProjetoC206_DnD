@@ -43,9 +43,9 @@ public class Login extends javax.swing.JFrame {
         lbl_loginName = new javax.swing.JLabel();
         lbl_loginSenha = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
-        txt_senha = new javax.swing.JTextField();
         btn_novoUser = new javax.swing.JButton();
         btn_login = new javax.swing.JButton();
+        txt_senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,15 +90,13 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(lbl_loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_loginSenha)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_loginName)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_loginName)
+                                    .addComponent(lbl_loginSenha))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(txt_senha))))
                         .addGap(0, 80, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -116,10 +114,12 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(lbl_loginName)
                     .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_loginSenha)
-                    .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(txt_senha)
+                        .addGap(1, 1, 1)))
+                .addGap(27, 27, 27)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_novoUser)
                     .addComponent(btn_login))
@@ -196,7 +196,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_loginSenha;
     private javax.swing.JLabel lbl_loginTitle;
     private javax.swing.JPanel panel1;
-    private javax.swing.JTextField txt_senha;
+    private javax.swing.JPasswordField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 
@@ -264,6 +264,7 @@ public class Login extends javax.swing.JFrame {
                 Arquivo.nomeUsuario = user;
                 TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
                 telaPrincipal.setVisible(true);     // Chama a tela de menu
+                telaPrincipal.userName = txt_usuario.getText();
                 this.dispose();
                 flag = true;
             } 
