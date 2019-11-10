@@ -23,19 +23,20 @@ import java.util.logging.Logger;
  */
 public class Arquivo {
     
-    public static String nomeUsuario;
+    public String nomeArquivo;
     
-    public Arquivo(String num) {
+    public Arquivo(String aux) {
+        this.nomeArquivo = aux;
         try {
-            OutputStream os = new FileOutputStream(nomeUsuario+"Mesas.txt", true);
+            OutputStream os = new FileOutputStream(nomeArquivo, true);
         } catch (Exception e) {
         }
     }
     
-    public void salvarArquivo(ArrayList<Actor> ator,String num){
+    public void salvarArquivo(ArrayList<Actor> ator){
         try {
             //salvando em um arquivo
-            OutputStream os = new FileOutputStream(nomeUsuario+"Mesas.txt", false);
+            OutputStream os = new FileOutputStream(nomeArquivo, false);
             ObjectOutputStream osw = new ObjectOutputStream(os);
             osw.writeObject(ator);
 
@@ -59,7 +60,7 @@ public class Arquivo {
         ArrayList<Actor> atores = new ArrayList<>();
 
         try {
-            fin = new FileInputStream(nomeUsuario+"Mesas.txt");
+            fin = new FileInputStream(nomeArquivo);
             in = new ObjectInputStream(fin);
 
             atores = (ArrayList<Actor>) in.readObject();

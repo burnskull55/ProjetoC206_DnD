@@ -237,7 +237,7 @@ public class Login extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Nenhum usuário cadastrado !", "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
-            // Sempre fechar o arquivo após ler/gravar !!
+            // fechando o arquivo
             try {
                 bufferEntrada.close();      // Fecha o arquivo
             } catch (Exception ex) {
@@ -261,10 +261,9 @@ public class Login extends javax.swing.JFrame {
             }
             if (user.equals(linha[j]) && pass.equals(linha[j + 1])) {
                 // Aprovado
-                Arquivo.nomeUsuario = user;
+               // Arquivo.nomeUsuario = user;
                 TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
                 telaPrincipal.setVisible(true);     // Chama a tela de menu
-                telaPrincipal.userName = txt_usuario.getText();
                 this.dispose();
                 flag = true;
             } 

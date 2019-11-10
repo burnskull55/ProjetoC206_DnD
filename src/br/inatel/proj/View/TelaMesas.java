@@ -5,19 +5,25 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.Arquivo;
+
 /**
  *
  * @author burns
  */
 public class TelaMesas extends javax.swing.JFrame {
 
-    public String userName;
+    private String user;
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
     /**
      * Creates new form TelaPrincipal
      */
     public TelaMesas() {
         initComponents();
-        lbl_dmName.setText(userName);
+        lbl_dmName.setVisible(true);
     }
 
     /**
@@ -155,11 +161,11 @@ public class TelaMesas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
-        // TODO add your handling code here:
+        verMesa();
     }//GEN-LAST:event_btn_selectActionPerformed
 
     private void btn_cadastraMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastraMesaActionPerformed
-        // TODO add your handling code here:
+        cadastrarNewMesa();
     }//GEN-LAST:event_btn_cadastraMesaActionPerformed
 
     /**
@@ -210,4 +216,18 @@ public class TelaMesas extends javax.swing.JFrame {
     private javax.swing.JList<String> list_mesas;
     private javax.swing.JTextField txt_mesaName;
     // End of variables declaration//GEN-END:variables
+
+
+    private void limparCampos() {
+        txt_mesaName.setText("");
+    }
+
+    private void cadastrarNewMesa() {
+        String aux = txt_mesaName.getText();
+        
+    }
+
+    private void verMesa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
