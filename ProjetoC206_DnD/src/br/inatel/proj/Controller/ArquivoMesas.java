@@ -26,10 +26,10 @@ import java.util.logging.Logger;
  * classe que controla o arquivo para salvar os objetos mesa
  */
 public class ArquivoMesas {
-    private String autor = "usuario";
+    private String autor;
     
-    public ArquivoMesas() {
-        //this.autor = autor;
+    public ArquivoMesas(String autor) {
+        this.autor = autor;
         try {
             OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", true);
         } catch (Exception e) {

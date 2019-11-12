@@ -6,6 +6,7 @@
 package br.inatel.proj.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,7 @@ public class DungeonMaster implements Serializable{
     
     private String userName;
     private String password;
+    //private ArrayList<Mesa> mesas = new ArrayList();
 
     public String getUserName() {
         return userName;

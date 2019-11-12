@@ -5,7 +5,9 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoLogin;
 import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.DungeonMaster;
 import br.inatel.proj.Model.Mesa;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,19 +31,26 @@ import javax.swing.ListModel;
  */
 public class TelaMesas extends javax.swing.JFrame {
 
-    private ArquivoMesas arquivo = new ArquivoMesas();
+    
+    private final ArquivoMesas arquivo;
+    private ArrayList<DungeonMaster> dms = new ArrayList();//array para a manipulaçao do arquivo
+    private static DungeonMaster dmstatic = new DungeonMaster();
     private ArrayList<Mesa> mesas = new ArrayList();
     private DefaultListModel dlm = new DefaultListModel();
+    
+    
 
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaMesas() { //construtor
+    public TelaMesas(DungeonMaster dm) { //construtor
+        
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_login);
-        mesas = arquivo.ler;
-
+        
+        TelaMesas.dmstatic = dm;
+        arquivo = new ArquivoMesas(dmstatic.getUserName());
     }
 
     /**
@@ -60,7 +69,6 @@ public class TelaMesas extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlist_mesas = new javax.swing.JList<>();
-        btn_load = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,14 +99,6 @@ public class TelaMesas extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jlist_mesas);
 
-        btn_load.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_load.setText("Carregar");
-        btn_load.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_loadActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -107,9 +107,7 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_loginmesa)
-                            .addComponent(btn_load, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_loginmesa)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -128,10 +126,7 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addComponent(lbl_loginTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(lbl_loginmesa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_load))
+                    .addComponent(lbl_loginmesa)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,10 +163,6 @@ public class TelaMesas extends javax.swing.JFrame {
         selecionaMesa();
     }//GEN-LAST:event_btn_loginActionPerformed
 
-    private void btn_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loadActionPerformed
-        carregar();
-    }//GEN-LAST:event_btn_loadActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -203,13 +194,12 @@ public class TelaMesas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaMesas().setVisible(true);
+                new TelaMesas(dmstatic).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_load;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_novamesa;
     private javax.swing.JScrollPane jScrollPane1;
@@ -220,11 +210,11 @@ public class TelaMesas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void criaMesa() {
-        String aux = JOptionPane.showInputDialog("entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
+        String aux = JOptionPane.showInputDialog(rootPane,"entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
         Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
         mesa.setNome(aux);
         mesas.add(mesa);
-        this.arquivo.salvarArquivo(mesas);
+        
         rebuild();
     }
 
@@ -238,6 +228,18 @@ public class TelaMesas extends javax.swing.JFrame {
     private void carregar(){
         
         
+    }
+
+    private boolean checkInputs(DungeonMaster dm) {
+        
+        for (DungeonMaster dm1 : dms) {
+            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
 }

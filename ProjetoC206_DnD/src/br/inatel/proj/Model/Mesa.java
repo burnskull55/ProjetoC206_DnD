@@ -6,15 +6,20 @@
 package br.inatel.proj.Model;
 
 import br.inatel.proj.View.TelaControleMesa;
+import java.util.ArrayList;
 
 /**
  *
  * @author burns
  */
 public class Mesa {
-    private String nome;
+    
     public TelaControleMesa tela = new TelaControleMesa();
-
+    private String nome;
+    private ArrayList<Character> characters = new ArrayList();
+    private ArrayList<Monstro> monstros = new ArrayList();
+    private ArrayList<Npc> npcs = new ArrayList();
+    
     public Mesa() {
         
     }
