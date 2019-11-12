@@ -6,15 +6,16 @@
 package br.inatel.proj.Model;
 
 import br.inatel.proj.View.TelaControleMesa;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author burns
  */
-public class Mesa {
+public class Mesa implements Serializable, Comparable<Mesa>{
     
-    public TelaControleMesa tela = new TelaControleMesa();
+    //public TelaControleMesa tela = new TelaControleMesa();
     private String nome;
     private ArrayList<Character> characters = new ArrayList();
     private ArrayList<Monstro> monstros = new ArrayList();
@@ -33,12 +34,10 @@ public class Mesa {
         this.nome = nome;
     }
 
-    public TelaControleMesa getTela() {
-        return tela;
-    }
 
-    public void setTela(TelaControleMesa tela) {
-        this.tela = tela;
+    @Override
+    public int compareTo(Mesa o) {
+       return  this.getNome().compareTo(o.getNome());
     }
     
     

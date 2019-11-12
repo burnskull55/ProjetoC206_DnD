@@ -27,7 +27,7 @@ public class ArquivoLogin {
     public ArquivoLogin() {
         try {
             OutputStream os = new FileOutputStream("login.txt", true);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
         }
     }
     

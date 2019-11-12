@@ -233,10 +233,6 @@ public class Cadastro extends javax.swing.JFrame {
                 // salva os dados
                 salvarDados(dm);
                 limparCampos();
-                for (DungeonMaster dm1 : dms) {
-                    System.out.println(dm1.getUserName());
-                    System.out.println(dm1.getPassword());
-                }
                 cancel();
             } else {
                 // Caso esteja errado emite um Erro

@@ -53,6 +53,7 @@ public class Main {
         7-TODO
         //criar a funçao de criar um personagem , que vai colocar todas as partes do char 
         criar a funçao de add char , que vai permitir o imput manual de cada aspecto do char
+        8-TODO telaMesas seleciona mesa finalizar funçao , continuar no backend das telas
         
         */
     }

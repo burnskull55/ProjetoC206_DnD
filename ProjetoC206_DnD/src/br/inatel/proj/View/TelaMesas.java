@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import static java.time.zone.ZoneRulesProvider.refresh;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -31,26 +32,27 @@ import javax.swing.ListModel;
  */
 public class TelaMesas extends javax.swing.JFrame {
 
-    
-    private final ArquivoMesas arquivo;
-    private ArrayList<DungeonMaster> dms = new ArrayList();//array para a manipulaçao do arquivo
-    private static DungeonMaster dmstatic = new DungeonMaster();
+    private ArquivoMesas arquivo;
+    private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
+    private static DungeonMaster dmstatic = new DungeonMaster();//dungeon master dono dessa mesa
+    private boolean tag = false;
+    
     private DefaultListModel dlm = new DefaultListModel();
-    
-    
 
     /**
      * Creates new form TelaPrincipal
      */
     public TelaMesas(DungeonMaster dm) { //construtor
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_login);
-        
+
         TelaMesas.dmstatic = dm;
         arquivo = new ArquivoMesas(dmstatic.getUserName());
+        
+
     }
 
     /**
@@ -68,7 +70,8 @@ public class TelaMesas extends javax.swing.JFrame {
         btn_novamesa = new javax.swing.JButton();
         btn_login = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jlist_mesas = new javax.swing.JList<>();
+        list_mesas = new javax.swing.JList<>();
+        btn_listar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,7 +100,17 @@ public class TelaMesas extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jlist_mesas);
+        list_mesas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        list_mesas.setModel(dlm);
+        jScrollPane1.setViewportView(list_mesas);
+
+        btn_listar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_listar.setText("Listar");
+        btn_listar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_listarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -107,7 +120,9 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lbl_loginmesa)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_loginmesa)
+                            .addComponent(btn_listar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -126,7 +141,10 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addComponent(lbl_loginTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_loginmesa)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(lbl_loginmesa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_listar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -162,6 +180,10 @@ public class TelaMesas extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         selecionaMesa();
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void btn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listarActionPerformed
+        listaInit();
+    }//GEN-LAST:event_btn_listarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,46 +222,103 @@ public class TelaMesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_listar;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_novamesa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> jlist_mesas;
     private javax.swing.JLabel lbl_loginTitle;
     private javax.swing.JLabel lbl_loginmesa;
+    private javax.swing.JList<String> list_mesas;
     private javax.swing.JPanel panel1;
     // End of variables declaration//GEN-END:variables
 
     private void criaMesa() {
-        String aux = JOptionPane.showInputDialog(rootPane,"entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
         Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
+        String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
         mesa.setNome(aux);
-        mesas.add(mesa);
-        
-        rebuild();
-    }
 
-    private void selecionaMesa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void rebuild() {
-        this.panel1.repaint();
-    }
-    private void carregar(){
-        
-        
-    }
-
-    private boolean checkInputs(DungeonMaster dm) {
-        
-        for (DungeonMaster dm1 : dms) {
-            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())) {
-                return true;
-            }
+        if (isUnique(mesa)) {
+            // se nao existir cai aqui
+            // salva os dados
+            salvarDados(mesa);
+        } else {
+            // Caso esteja errado emite um Erro
+            String msg = "Mesa já cadastrada!";
+            String title = "Mesa já existe!";
+            int msgType = JOptionPane.ERROR_MESSAGE;
+            JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
 
         }
 
-        return false;
+    }
+
+    private void selecionaMesa() {
+        String aux = list_mesas.getSelectedValue();//tring q recebe o valor selecionado da lista 
+        findTable(aux);
+        /*apartir daqui o onjeto this.mesa ja tem a mesa selecionada pelo usuario 
+        TODO chamar uma tela de controle mesa 
+        fazer o mesmo processo de um item statico para elas , passando como parametro o onjeto this.mesa modificado nessa funçao
+        
+        */
+    }
+
+    private void listaInit() {
+
+        mesas = arquivo.ler();
+        Collections.sort(mesas);
+        
+        if (tag == false) {
+            for (Mesa mesa1 : mesas) {    //Percorre o Arquivo
+                //Adiciona na lista os atributos da classe Pessoa
+                dlm.addElement(mesa1.getNome());
+                dlm.addElement("------------------------------------");
+            }
+        } else {
+            dlm.clear();
+            for (Mesa mesa1 : mesas) {
+                dlm.addElement(mesa1.getNome());
+                dlm.addElement("------------------------------------");
+            }
+        }
+
+        tag = true;
+
+    }
+
+    private boolean isUnique(Mesa mesa) {
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(mesa.getNome())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private void salvarDados(Mesa mesa) {
+        mesas.add(mesa);
+        System.out.println(arquivo.getAutor());
+        for (Mesa mesa1 : mesas) {
+            System.out.println(mesa1.getNome());
+        }
+        
+        
+        arquivo.salvarArquivo(mesas);
+        
+    }
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : mesas) {
+            if(mesa1.getNome().equals(aux)){
+                this.mesa = mesa1;
+                find = true;
+                
+            }
+        }
+        if(!find){
+            System.out.println("wtf");
+        }
     }
 
 }

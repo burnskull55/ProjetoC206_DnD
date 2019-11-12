@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,14 +26,19 @@ import java.util.logging.Logger;
  * @version 1.0
  * classe que controla o arquivo para salvar os objetos mesa
  */
-public class ArquivoMesas {
-    private String autor;
+public class ArquivoMesas implements Serializable{
+    private final String autor;
+
+    public String getAutor() {
+        return autor;
+    }
+    
     
     public ArquivoMesas(String autor) {
         this.autor = autor;
         try {
             OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", true);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
         }
     }
     
