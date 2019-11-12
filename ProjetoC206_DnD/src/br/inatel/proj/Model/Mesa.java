@@ -14,5 +14,27 @@ import br.inatel.proj.View.TelaControleMesa;
 public class Mesa {
     private String nome;
     public TelaControleMesa tela = new TelaControleMesa();
+
+    public Mesa() {
+        
+    }
+
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public TelaControleMesa getTela() {
+        return tela;
+    }
+
+    public void setTela(TelaControleMesa tela) {
+        this.tela = tela;
+    }
+    
     
 }

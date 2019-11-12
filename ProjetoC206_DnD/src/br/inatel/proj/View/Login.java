@@ -5,7 +5,7 @@
  */
 package br.inatel.proj.View;
 
-import br.inatel.proj.Controller.Arquivo;
+import br.inatel.proj.Controller.ArquivoLogin;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,6 +27,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_login);
     }
 
     /**
@@ -209,6 +211,8 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void novoUsuario() {
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_login);
         Cadastro c = new Cadastro();
         c.setVisible(true);
         this.dispose();
@@ -262,7 +266,9 @@ public class Login extends javax.swing.JFrame {
             if (user.equals(linha[j]) && pass.equals(linha[j + 1])) {
                 // Aprovado
                // Arquivo.nomeUsuario = user;
+               
                 TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
+                telaPrincipal.initArquivo(user);
                 telaPrincipal.setVisible(true);     // Chama a tela de menu
                 this.dispose();
                 flag = true;

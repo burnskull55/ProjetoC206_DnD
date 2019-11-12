@@ -5,19 +5,54 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.Mesa;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import static java.time.zone.ZoneRulesProvider.refresh;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+
 /**
  *
  * @author burns
  */
 public class TelaMesas extends javax.swing.JFrame {
 
-    public String userName;
+    private String autor;
+    private ArquivoMesas arquivo;
+    public void initArquivo(String autor) {
+        this.autor = autor;
+        arquivo = new ArquivoMesas(this.autor);
+    }
+
+     
+    ArrayList<Mesa> mesas = new ArrayList();
+    DefaultListModel dlm = new DefaultListModel();
+
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaMesas() {
+    public TelaMesas() { //construtor
         initComponents();
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_login);
         
+        mesas = arquivo.ler();
+        for (Mesa mesa1 : mesas) {
+            dlm.addElement(mesa1);
+        }
+
     }
 
     /**
@@ -32,9 +67,10 @@ public class TelaMesas extends javax.swing.JFrame {
         panel1 = new javax.swing.JPanel();
         lbl_loginTitle = new javax.swing.JLabel();
         lbl_loginmesa = new javax.swing.JLabel();
-        txt_mesaid = new javax.swing.JTextField();
         btn_novamesa = new javax.swing.JButton();
         btn_login = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlist_mesas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +99,8 @@ public class TelaMesas extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(jlist_mesas);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -70,20 +108,18 @@ public class TelaMesas extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_loginmesa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(lbl_loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(lbl_loginmesa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_mesaid, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 19, Short.MAX_VALUE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_novamesa, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                        .addComponent(btn_novamesa, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -91,14 +127,14 @@ public class TelaMesas extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(lbl_loginTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_loginmesa)
-                    .addComponent(txt_mesaid, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_login)
                     .addComponent(btn_novamesa))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,11 +158,11 @@ public class TelaMesas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_novamesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novamesaActionPerformed
-        novaMesa();
+        criaMesa();
     }//GEN-LAST:event_btn_novamesaActionPerformed
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        entrar();
+        selecionaMesa();
     }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
@@ -168,17 +204,28 @@ public class TelaMesas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_novamesa;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jlist_mesas;
     private javax.swing.JLabel lbl_loginTitle;
     private javax.swing.JLabel lbl_loginmesa;
     private javax.swing.JPanel panel1;
-    private javax.swing.JTextField txt_mesaid;
     // End of variables declaration//GEN-END:variables
 
-    private void novaMesa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void criaMesa() {
+         String aux = JOptionPane.showInputDialog("entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
+         Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
+         mesa.setNome(aux);
+         mesas.add(mesa);
+         this.arquivo.salvarArquivo(mesas);
+         rebuild();
     }
 
-    private void entrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void selecionaMesa() {
+        
     }
+
+    private void rebuild() {
+        panel1.repaint();
+    }
+
 }

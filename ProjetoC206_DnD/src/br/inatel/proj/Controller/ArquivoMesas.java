@@ -6,6 +6,7 @@
 package br.inatel.proj.Controller;
 
 import br.inatel.proj.Model.Actor;
+import br.inatel.proj.Model.Mesa;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,50 +21,52 @@ import java.util.logging.Logger;
 /**
  *
  * @author burns
+ * @since 11/11/19
+ * @version 1.0
+ * classe que controla o arquivo para salvar os objetos mesa
  */
-public class Arquivo {
+public class ArquivoMesas {
+    private String autor;
     
-    public String nomeArquivo;
-    
-    public Arquivo(String aux) {
-        this.nomeArquivo = aux;
+    public ArquivoMesas(String autor) {
+        this.autor = autor;
         try {
-            OutputStream os = new FileOutputStream(nomeArquivo, true);
+            OutputStream os = new FileOutputStream(this.autor+"mesas.txt", true);
         } catch (Exception e) {
         }
     }
     
-    public void salvarArquivo(ArrayList<Actor> ator){
+    public void salvarArquivo(ArrayList<Mesa> mesa){
         try {
             //salvando em um arquivo
-            OutputStream os = new FileOutputStream(nomeArquivo, false);
+            OutputStream os = new FileOutputStream(this.autor+"mesas.txt", false);
             ObjectOutputStream osw = new ObjectOutputStream(os);
-            osw.writeObject(ator);
+            osw.writeObject(mesa);
 
             //fechando o arquivo
             osw.close();
             os.close();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArquivoLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArquivoLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
     
     
-    public ArrayList<Actor> ler() {
+    public ArrayList<Mesa> ler() {
 
         FileInputStream fin;
         ObjectInputStream in;
-        ArrayList<Actor> atores = new ArrayList<>();
+        ArrayList<Mesa> mesas = new ArrayList<>();
 
         try {
-            fin = new FileInputStream(nomeArquivo);
+            fin = new FileInputStream("mesas.txt");
             in = new ObjectInputStream(fin);
 
-            atores = (ArrayList<Actor>) in.readObject();
+            mesas = (ArrayList<Mesa>) in.readObject();
 
             in.close();
             fin.close();
@@ -71,6 +74,6 @@ public class Arquivo {
             System.out.println(ex);
         }
         
-        return atores;
+        return mesas;
     }
 }
