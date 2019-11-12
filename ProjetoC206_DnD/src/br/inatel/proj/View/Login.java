@@ -6,12 +6,15 @@
 package br.inatel.proj.View;
 
 import br.inatel.proj.Controller.ArquivoLogin;
+import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.DungeonMaster;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,8 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    private String[] linha = new String[1000];
-    
+    private final ArquivoLogin arquivo = new ArquivoLogin();
+    private ArrayList<DungeonMaster> dms = new ArrayList();
+
     /**
      * Creates new form Login
      */
@@ -29,6 +33,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_login);
+
+        dms = arquivo.ler();
     }
 
     /**
@@ -206,85 +212,53 @@ public class Login extends javax.swing.JFrame {
         this.txt_usuario.setText("");
         this.txt_senha.setText("");
     }
-    private void entrar() {
-        lerDados();
-    }
-    
+
     private void novoUsuario() {
-        this.setLocationRelativeTo(null);
-        getRootPane().setDefaultButton(btn_login);
-        Cadastro c = new Cadastro();
-        c.setVisible(true);
+        Cadastro cadastro = new Cadastro();
+        cadastro.setVisible(true);
         this.dispose();
     }
 
-    private void lerDados() {
-        InputStream fluxoEntrada;               // Fluxo de entrada
-        InputStreamReader leitorFluxoEntrada;   // Leitor do fluxo de entrada
-        BufferedReader bufferEntrada = null;    // Buffer da entrada
-        int i = 0;
+    private void entrar() {
+        DungeonMaster dm = new DungeonMaster();//cria uma variavel dm aux 
+        String aux1 = txt_usuario.getText();
+        String aux2 = txt_senha.getText();
 
-        try {
-            fluxoEntrada = new FileInputStream("usuarios.txt");
-            leitorFluxoEntrada = new InputStreamReader(fluxoEntrada);
-            bufferEntrada = new BufferedReader(leitorFluxoEntrada);
-            linha[0] = bufferEntrada.readLine();
-            i++;
-            while (i != 1000) {
-                linha[i] = bufferEntrada.readLine();
-                i++;
-            }
+        dm.setUserName(aux1);
+        dm.setPassword(aux2);
+        boolean flag = true;//inicializa flag com um valor que ativa o if(1),causando um erro
 
-            // Tratamento de Erros
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Nenhum usuário cadastrado !", "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Nenhum usuário cadastrado !", "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // fechando o arquivo
-            try {
-                bufferEntrada.close();      // Fecha o arquivo
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao consultar arquivo !", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+        if (checkInputs(dm)) {//encontrado um objeto user com senha e usuario confirmados
+
+            TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
+            telaPrincipal.setVisible(true);     // Chama a tela de menu
+            this.dispose();
+            flag = false;
+
         }
 
-        verificacao();
-
-    }
-
-    private void verificacao() {
-        String user = txt_usuario.getText();
-        String pass = txt_senha.getText();
-        boolean flag = false;
-
-        for (int j = 0; j < 1000; j++) {
-
-            if (linha[j + 1] == null) {
-                break;
-            }
-            if (user.equals(linha[j]) && pass.equals(linha[j + 1])) {
-                // Aprovado
-               // Arquivo.nomeUsuario = user;
-               
-                TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
-                telaPrincipal.initArquivo(user);
-                telaPrincipal.setVisible(true);     // Chama a tela de menu
-                this.dispose();
-                flag = true;
-            } 
-        }
-        if (!flag) {
+        if (flag) {//(1)
             // Caso esteja errado emite um Erro
             String msg = "Usuario e/ou senha inválidos!";
             String title = "Erro ao efetuar login!";
             int msgType = JOptionPane.ERROR_MESSAGE;
-            
             JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
 
             // Limpa os campos de texto
             limparCampos();
         }
-        
     }
+
+    private boolean checkInputs(DungeonMaster dm) {
+
+        for (DungeonMaster dm1 : dms) {
+            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
 }

@@ -29,16 +29,9 @@ import javax.swing.ListModel;
  */
 public class TelaMesas extends javax.swing.JFrame {
 
-    private String autor;
-    private ArquivoMesas arquivo;
-    public void initArquivo(String autor) {
-        this.autor = autor;
-        arquivo = new ArquivoMesas(this.autor);
-    }
-
-     
-    ArrayList<Mesa> mesas = new ArrayList();
-    DefaultListModel dlm = new DefaultListModel();
+    private ArquivoMesas arquivo = new ArquivoMesas();
+    private ArrayList<Mesa> mesas = new ArrayList();
+    private DefaultListModel dlm = new DefaultListModel();
 
     /**
      * Creates new form TelaPrincipal
@@ -47,11 +40,7 @@ public class TelaMesas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_login);
-        
-        mesas = arquivo.ler();
-        for (Mesa mesa1 : mesas) {
-            dlm.addElement(mesa1);
-        }
+        mesas = arquivo.ler;
 
     }
 
@@ -71,6 +60,7 @@ public class TelaMesas extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlist_mesas = new javax.swing.JList<>();
+        btn_load = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +91,14 @@ public class TelaMesas extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jlist_mesas);
 
+        btn_load.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_load.setText("Carregar");
+        btn_load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -109,8 +107,10 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lbl_loginmesa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_loginmesa)
+                            .addComponent(btn_load, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(126, 126, 126)
@@ -128,7 +128,10 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addComponent(lbl_loginTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_loginmesa)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(lbl_loginmesa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_load))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,6 +167,10 @@ public class TelaMesas extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         selecionaMesa();
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void btn_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loadActionPerformed
+        carregar();
+    }//GEN-LAST:event_btn_loadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,6 +209,7 @@ public class TelaMesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_load;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_novamesa;
     private javax.swing.JScrollPane jScrollPane1;
@@ -212,20 +220,24 @@ public class TelaMesas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void criaMesa() {
-         String aux = JOptionPane.showInputDialog("entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
-         Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
-         mesa.setNome(aux);
-         mesas.add(mesa);
-         this.arquivo.salvarArquivo(mesas);
-         rebuild();
+        String aux = JOptionPane.showInputDialog("entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
+        Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
+        mesa.setNome(aux);
+        mesas.add(mesa);
+        this.arquivo.salvarArquivo(mesas);
+        rebuild();
     }
 
     private void selecionaMesa() {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rebuild() {
-        panel1.repaint();
+        this.panel1.repaint();
+    }
+    private void carregar(){
+        
+        
     }
 
 }

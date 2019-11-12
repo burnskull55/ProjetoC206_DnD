@@ -5,6 +5,8 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoLogin;
+import br.inatel.proj.Model.DungeonMaster;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -15,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +25,9 @@ import javax.swing.JOptionPane;
  * @author burns
  */
 public class Cadastro extends javax.swing.JFrame {
-
-    private String usuario = null;
-    private String senha = null;
-    private String[] linha = new String[1000];
+    
+    private final ArquivoLogin arquivo = new ArquivoLogin();
+    private ArrayList<DungeonMaster> dms = new ArrayList();
 
     /**
      * Creates new form Cadastro
@@ -158,7 +160,7 @@ public class Cadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastroActionPerformed
-       cadastro();
+        cadastro();
     }//GEN-LAST:event_btn_cadastroActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -214,135 +216,75 @@ public class Cadastro extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cadastro() {
-        usuario = txt_username.getText();
-        senha = txt_senha.getText();
-        String senha2 = txt_senhaconfirm.getText();
+        //variaveis aux para comparar as strings de senha e salvar em um novo objeto dm
+        DungeonMaster dm = new DungeonMaster();
+        String aux1 = txt_username.getText();
+        String aux2 = txt_senha.getText();
+        String aux3 = txt_senhaconfirm.getText();
         
-        if ( senha.equals(senha2) ) {   // Confirmação de senha
-            try {
-                lerDados();
-            } catch (Exception e) {
-                System.out.println("Criando aquivo usuarios.txt ...");
-                try {
-                    OutputStream os = new FileOutputStream("usuarios.txt", true);
-                } catch (FileNotFoundException ex) {
-                    System.out.println("Erro no lerdados de novo" + ex.toString());
-                }
-            }
-
-            // Verifica se já existe tal usuario
-            if (!verificaDados()) {
+        if (aux2.equals(aux3)) {   // Confirmação de senha
+            dms = arquivo.ler();
+            
+            dm.setUserName(aux1);
+            dm.setPassword(aux2);
+            
+            if (isUnique(dm)) {
                 // se nao existir cai aqui
                 // salva os dados
-                salvarDados();
+                salvarDados(dm);
                 limparCampos();
-                sair();
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane,"As senhas não conhecidem!", "Senha inválida", JOptionPane.ERROR_MESSAGE);
-            txt_senha.setText("");
-            txt_senhaconfirm.setText("");
-        }
-        
-    }
-
-    private void cancel() {
-        sair();
-    }
-    private void lerDados() {
-        InputStream fluxoEntrada;               // Fluxo de entrada
-        InputStreamReader leitorFluxoEntrada;   // Leitor do fluxo de entrada
-        BufferedReader bufferEntrada = null;    // Buffer da entrada
-        int i = 0;
-
-        try {
-            fluxoEntrada = new FileInputStream("usuarios.txt");           // Abre o arquivo "aula12.txt"
-            leitorFluxoEntrada = new InputStreamReader(fluxoEntrada);   // Faz a leitura do arquivo
-            bufferEntrada = new BufferedReader(leitorFluxoEntrada);     // Buffer de entrada
-            linha[0] = bufferEntrada.readLine();                           // Lê a linha e armazena na variavel auxiliar
-            i++;
-            while (i != 1000) {                 // Enquanto não chegar no final do arquivo
-                linha[i] = bufferEntrada.readLine();   // Pula para a próxima linha
-                i++;
-                if (linha[i] == null) {
-                    break;
+                for (DungeonMaster dm1 : dms) {
+                    System.out.println(dm1.getUserName());
+                    System.out.println(dm1.getPassword());
                 }
-            }
+                cancel();
+            } else {
+                // Caso esteja errado emite um Erro
+                String msg = "Usuario já esta cadastrado!";
+                String title = "Usuario já existe!";
+                int msgType = JOptionPane.ERROR_MESSAGE;
+                JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
 
-            // Tratamento de Erros
-        } catch (FileNotFoundException ex) {
-            System.out.println("Arquivo não encontrado! Método lerDados()");
-        } catch (IOException ex) {
-            System.out.println("IOException");
-        } finally {
-            // Sempre fechar o arquivo após ler/gravar !!
-            try {
-                bufferEntrada.close();      // Fecha o arquivo
-            } catch (IOException ex) {
-                System.out.println("IOException !");
-                ex.printStackTrace();
-            }
-        }
-    }
-    private void salvarDados() {
-        OutputStream fluxoSaida;                // Fluxo de Saida de dados
-        OutputStreamWriter geradorFluxoSaida;   // Gerador do Fluxo de Saida
-        BufferedWriter bufferSaida = null;      // Buffer da saida
-
-        try {
-            fluxoSaida = new FileOutputStream("usuarios.txt", true);   // Cria o arquivo "usuarios.txt" na pasta do projeto
-            geradorFluxoSaida = new OutputStreamWriter(fluxoSaida); // Todo o fluxo de dados será armazenado neste arquivo
-            bufferSaida = new BufferedWriter(geradorFluxoSaida);    // Buffer para o gerador de fluxo
-
-            bufferSaida.write(usuario);     // Escreve na primeira linha
-            bufferSaida.newLine();                          // Insere uma nova linha no arquivo
-            bufferSaida.write(senha);     // Escreve na segunda linha
-            bufferSaida.newLine();                          // Insere uma nova linha
-
-            // Tratamento de Erros
-        } catch (FileNotFoundException ex) {
-            System.err.println("Arquivo não encontrado ! método salvarDados()");
-        } catch (IOException ex) {
-            System.out.println("Erro de Entrada e Saida de dados no arquivo");
-        } finally {
-
-            // Sempre fechar o arquivo após ler/gravar !!
-            try {
-                bufferSaida.close();    // Fecha o arquivo
-            } catch (IOException ex) {
-                System.err.println("Deu ruim ao fechar o arquivo");
-                ex.printStackTrace();
-            }
-        }
-
-        // Se deu tudo certo cai aqui
-        JOptionPane.showMessageDialog(rootPane, "Usuario cadastrado com Sucesso!");
-    }
-    private boolean verificaDados() {
-        for (int i = 0; i < linha.length; i++) {
-            if (linha[i] == null) {
-                break;
-            }
-            if (linha[i].equals(usuario)) {
-                JOptionPane.showMessageDialog(rootPane, "Usuario ja cadastrado");
+                // Limpa os campos de texto
                 limparCampos();
-                return true;
+                
+            }
+            
+        } else {
+            // Caso esteja errado emite um Erro
+            String msg = "As senhas nao coincidem!";
+            String title = "Senha Incorreta!";
+            int msgType = JOptionPane.ERROR_MESSAGE;
+            JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
+
+            // Limpa os campos de texto
+            limparCampos();
+        }
+    }
+    
+    private boolean isUnique(DungeonMaster dm) {
+        for (DungeonMaster dm1 : dms) {
+            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())){
+                return false; //retorna falso caso encontre outro dm com os mesmos atributos
             }
         }
-        return false;
+        return true;//caso nao encontre nenhum dm igual
     }
-
+    
+    private void salvarDados(DungeonMaster dm) {
+        dms.add(dm);
+        arquivo.salvarArquivo(dms);
+    }
+    
     private void limparCampos() {
+        txt_username.setText("");
         txt_senha.setText("");
         txt_senhaconfirm.setText("");
-        txt_username.setText("");
     }
-
-    private void sair() {
-        Login l = new Login();
-        l.setVisible(true);
+    
+    private void cancel() {
+        Login login = new Login();
+        login.setVisible(true);
         this.dispose();
     }
-
-   
 }

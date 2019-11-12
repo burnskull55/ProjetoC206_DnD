@@ -5,13 +5,16 @@
  */
 package br.inatel.proj.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author burns
  * @since  11/11/19
  * @version 1.0
  */
-public class DungeonMaster {
+public class DungeonMaster implements Serializable{
+    
     private String userName;
     private String password;
 

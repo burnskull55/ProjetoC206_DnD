@@ -39,15 +39,17 @@ public class Main {
         Login l = new Login();
         l.setVisible(true);
         
+        
+        
         //TODO LIST
         //TODO - MODELING 
         /*
         1-inventario
-        2-dice methods
+        2-dice methods . not needed
         3-Character methods
         4-monster methods
         5-npc methods
-        6-class modeling
+        6-class modeling 
         7-TODO
         //criar a funçao de criar um personagem , que vai colocar todas as partes do char 
         criar a funçao de add char , que vai permitir o imput manual de cada aspecto do char

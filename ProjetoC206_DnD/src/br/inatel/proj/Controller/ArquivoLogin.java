@@ -6,6 +6,7 @@
 package br.inatel.proj.Controller;
 
 import br.inatel.proj.Model.Actor;
+import br.inatel.proj.Model.DungeonMaster;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,22 +24,19 @@ import java.util.logging.Logger;
  */
 public class ArquivoLogin {
     
-    public String nomeArquivo;
-    
-    public ArquivoLogin(String aux) {
-        this.nomeArquivo = aux;
+    public ArquivoLogin() {
         try {
-            OutputStream os = new FileOutputStream(nomeArquivo, true);
+            OutputStream os = new FileOutputStream("login.txt", true);
         } catch (Exception e) {
         }
     }
     
-    public void salvarArquivo(ArrayList<Actor> ator){
+    public void salvarArquivo(ArrayList<DungeonMaster> dm){
         try {
             //salvando em um arquivo
-            OutputStream os = new FileOutputStream(nomeArquivo, false);
+            OutputStream os = new FileOutputStream("login.txt", false);
             ObjectOutputStream osw = new ObjectOutputStream(os);
-            osw.writeObject(ator);
+            osw.writeObject(dm);
 
             //fechando o arquivo
             osw.close();
@@ -53,17 +51,17 @@ public class ArquivoLogin {
     }
     
     
-    public ArrayList<Actor> ler() {
+    public ArrayList<DungeonMaster> ler() {
 
         FileInputStream fin;
         ObjectInputStream in;
-        ArrayList<Actor> atores = new ArrayList<>();
+        ArrayList<DungeonMaster> dms = new ArrayList<>();
 
         try {
-            fin = new FileInputStream(nomeArquivo);
+            fin = new FileInputStream("login.txt");
             in = new ObjectInputStream(fin);
 
-            atores = (ArrayList<Actor>) in.readObject();
+            dms = (ArrayList<DungeonMaster>) in.readObject();
 
             in.close();
             fin.close();
@@ -71,6 +69,6 @@ public class ArquivoLogin {
             System.out.println(ex);
         }
         
-        return atores;
+        return dms;
     }
 }

@@ -26,12 +26,12 @@ import java.util.logging.Logger;
  * classe que controla o arquivo para salvar os objetos mesa
  */
 public class ArquivoMesas {
-    private String autor;
+    private String autor = "usuario";
     
-    public ArquivoMesas(String autor) {
-        this.autor = autor;
+    public ArquivoMesas() {
+        //this.autor = autor;
         try {
-            OutputStream os = new FileOutputStream(this.autor+"mesas.txt", true);
+            OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", true);
         } catch (Exception e) {
         }
     }
@@ -39,7 +39,7 @@ public class ArquivoMesas {
     public void salvarArquivo(ArrayList<Mesa> mesa){
         try {
             //salvando em um arquivo
-            OutputStream os = new FileOutputStream(this.autor+"mesas.txt", false);
+            OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", false);
             ObjectOutputStream osw = new ObjectOutputStream(os);
             osw.writeObject(mesa);
 
@@ -63,7 +63,7 @@ public class ArquivoMesas {
         ArrayList<Mesa> mesas = new ArrayList<>();
 
         try {
-            fin = new FileInputStream("mesas.txt");
+            fin = new FileInputStream(this.autor+"Mesas.txt");
             in = new ObjectInputStream(fin);
 
             mesas = (ArrayList<Mesa>) in.readObject();
