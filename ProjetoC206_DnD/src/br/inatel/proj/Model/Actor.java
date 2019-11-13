@@ -19,7 +19,7 @@ public abstract class Actor implements Serializable{
     protected String race;
     protected String backGround;
     protected String alignment;
-    protected int hp;
+    protected String hp;
     
             
 }

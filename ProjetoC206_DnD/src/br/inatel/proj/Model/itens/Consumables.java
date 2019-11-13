@@ -5,13 +5,14 @@
  */
 package br.inatel.proj.Model.itens;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author burns
  */
-public class Consumables {
+public class Consumables implements Serializable{
     private ArrayList<String> bag = new ArrayList();
 
     @Override

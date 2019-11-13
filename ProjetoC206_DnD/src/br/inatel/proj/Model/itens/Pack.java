@@ -5,10 +5,12 @@
  */
 package br.inatel.proj.Model.itens;
 
+import java.io.Serializable;
+
 /**
  *
  * @author burns
  */
-public class Pack {
+public class Pack implements Serializable{
     
 }

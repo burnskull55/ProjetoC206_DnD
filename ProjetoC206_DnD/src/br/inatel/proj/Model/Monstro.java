@@ -15,6 +15,5 @@ public class Monstro extends Actor{
     private int speed;
     private int level;
     private int ac;
-    private Dice hitDice = new Dice();  
     private int proficiency;
 }

@@ -8,12 +8,13 @@ package br.inatel.proj.Model;
 import br.inatel.proj.Model.itens.Arma;
 import br.inatel.proj.Model.itens.Consumables;
 import br.inatel.proj.Model.itens.Pack;
+import java.io.Serializable;
 
 /**
  *
  * @author burns
  */
-public class Inventario {
+public class Inventario implements Serializable{
     private Pack pack = new Pack();
     private Consumables consumables = new Consumables();
     private Arma arma = new Arma();

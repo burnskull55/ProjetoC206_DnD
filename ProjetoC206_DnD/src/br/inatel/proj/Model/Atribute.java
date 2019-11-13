@@ -5,18 +5,21 @@
  */
 package br.inatel.proj.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author burns
  */
-public class Atribute {
-    private int score;
-    private int modifier;
-    private int save;
+public class Atribute implements Serializable{
+    private String score;
+    private String  modifier;
+    private String save;
     private boolean isPro;
     
     
     
+    /*
     public Atribute(int pro) {
         if(this.score >= 8 && this.score <= 9){
             this.modifier = -1;
@@ -70,31 +73,40 @@ public class Atribute {
     }
     
 
-    
-    
-    public int getScore() {
+    */
+
+    public String getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
-    public int getModifier() {
+    public String getModifier() {
         return modifier;
     }
 
-    public void setModifier(int modifier) {
+    public void setModifier(String modifier) {
         this.modifier = modifier;
     }
 
-    public int getSave() {
+    public String getSave() {
         return save;
     }
 
-    public void setSave(int save) {
+    public void setSave(String save) {
         this.save = save;
     }
+
+    public boolean isIsPro() {
+        return isPro;
+    }
+
+    public void setIsPro(boolean isPro) {
+        this.isPro = isPro;
+    }
+    
     
     
     

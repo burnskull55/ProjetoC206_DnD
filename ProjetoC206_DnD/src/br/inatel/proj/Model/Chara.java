@@ -11,18 +11,18 @@ import java.io.Serializable;
  *
  * @author burns
  */
-public class Chara extends Actor implements Serializable,Comparable<Chara>{
+public class Chara extends Actor implements Serializable, Comparable<Chara> {
 
     private String classe;
-    private int initiative;
-    private int speed;
-    private int level;
-    private int ac;
-    private int proficiency;
+    private String initiative;
+    private String speed;
+    private String level;
+    private String ac;
+    private String proficiency;
 
-    private int goldP;
-    private int copperP;
-    private int silverP;
+    private String goldP;
+    private String copperP;
+    private String silverP;
 
     private Atribute str = new Atribute();
     private Atribute dex = new Atribute();
@@ -30,19 +30,10 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
     private Atribute iNt = new Atribute();
     private Atribute wis = new Atribute();
     private Atribute cha = new Atribute();
-    private Dice hitDice = new Dice();
 
     private Inventario inventario = new Inventario();
     private Grimorio spellbook = new Grimorio();
     private String notas;
-
-    public String getNotas() {
-        return notas;
-    }
-
-    public void setNotas(String notas) {
-        this.notas = notas;
-    }
 
     public String showChar() {
         String aux = "Char: " + nome + "\n"
@@ -73,7 +64,55 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
         return aux;
     }
 
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public String getBackGround() {
+        return backGround;
+    }
+
+    public void setBackGround(String backGround) {
+        this.backGround = backGround;
+    }
+
+    public String getAlignment() {
+        return alignment;
+    }
+
+    public void setAlignment(String alignment) {
+        this.alignment = alignment;
+    }
+
+    public String getHp() {
+        return hp;
+    }
+
     //get and set
+    public void setHp(String hp) {
+        this.hp = hp;
+    }
+
     public String getClasse() {
         return classe;
     }
@@ -82,67 +121,67 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
         this.classe = classe;
     }
 
-    public int getInitiative() {
+    public String getInitiative() {
         return initiative;
     }
 
-    public void setInitiative(int initiative) {
+    public void setInitiative(String initiative) {
         this.initiative = initiative;
     }
 
-    public int getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
-    public int getAc() {
+    public String getAc() {
         return ac;
     }
 
-    public void setAc(int ac) {
+    public void setAc(String ac) {
         this.ac = ac;
     }
 
-    public int getProficiency() {
+    public String getProficiency() {
         return proficiency;
     }
 
-    public void setProficiency(int proficiency) {
+    public void setProficiency(String proficiency) {
         this.proficiency = proficiency;
     }
 
-    public int getGoldP() {
+    public String getGoldP() {
         return goldP;
     }
 
-    public void setGoldP(int goldP) {
+    public void setGoldP(String goldP) {
         this.goldP = goldP;
     }
 
-    public int getCopperP() {
+    public String getCopperP() {
         return copperP;
     }
 
-    public void setCopperP(int copperP) {
+    public void setCopperP(String copperP) {
         this.copperP = copperP;
     }
 
-    public int getSilverP() {
+    public String getSilverP() {
         return silverP;
     }
 
-    public void setSilverP(int silverP) {
+    public void setSilverP(String silverP) {
         this.silverP = silverP;
     }
 
@@ -150,8 +189,8 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
         return str;
     }
 
-    public void setStr(Atribute Str) {
-        this.str = Str;
+    public void setStr(Atribute str) {
+        this.str = str;
     }
 
     public Atribute getDex() {
@@ -194,14 +233,6 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
         this.cha = cha;
     }
 
-    public Dice getHitDice() {
-        return hitDice;
-    }
-
-    public void setHitDice(Dice hitDice) {
-        this.hitDice = hitDice;
-    }
-
     public Inventario getInventario() {
         return inventario;
     }
@@ -218,49 +249,9 @@ public class Chara extends Actor implements Serializable,Comparable<Chara>{
         this.spellbook = spellbook;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public String getBackGround() {
-        return backGround;
-    }
-
-    public void setBackGround(String backGround) {
-        this.backGround = backGround;
-    }
-
-    public String getAlignment() {
-        return alignment;
-    }
-
-    public void setAlignment(String alignment) {
-        this.alignment = alignment;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
     @Override
     public int compareTo(Chara o) {
-        return this.getNome().compareTo(o.getNome());
+        return this.getClasse().compareTo(o.getClasse());
     }
 
 }

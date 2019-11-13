@@ -708,24 +708,24 @@ public class TelaAddChar extends javax.swing.JFrame {
         }
     }
 
-    private void lerdados() {  
+    private void lerdados() {
         //entrado com os valores de pessoal
         player.setNome(txt_nome.getText());
         player.setRace(txt_race.getText());
         player.setBackGround(txt_background.getText());
         player.setAlignment(txt_alignmemt.getText());
-        player.setHp(Integer.parseInt(txt_hp.getText()));
+        player.setHp(txt_hp.getText());
         //entrando com os valores de info
         player.setClasse(txt_classe.getText());
-        player.setLevel(Integer.parseInt(txt_nivel.getText()));
-        player.setSpeed(Integer.parseInt(txt_movimento.getText()));
-        player.setInitiative(Integer.parseInt(txt_iniciativa.getText()));
-        player.setAc(Integer.parseInt(txt_ac.getText()));
-        player.setProficiency(Integer.parseInt(txt_prof.getText()));
-        player.setGoldP(Integer.parseInt(txt_gold.getText()));
-        player.setSilverP(Integer.parseInt(txt_silver.getText()));
-        player.setCopperP(Integer.parseInt(txt_copper.getText()));
-        
+        player.setLevel(txt_nivel.getText());
+        player.setSpeed(txt_movimento.getText());
+        player.setInitiative(txt_iniciativa.getText());
+        player.setAc(txt_ac.getText());
+        player.setProficiency(txt_prof.getText());
+        player.setGoldP(txt_gold.getText());
+        player.setSilverP(txt_silver.getText());
+        player.setCopperP(txt_copper.getText());
+
         //criando atributos aux para colocar em player
         Atribute str = new Atribute();
         Atribute dex = new Atribute();
@@ -733,12 +733,12 @@ public class TelaAddChar extends javax.swing.JFrame {
         Atribute iNt = new Atribute();
         Atribute wis = new Atribute();
         Atribute cha = new Atribute();
-        str.setScore(Integer.parseInt(txt_str.getText()));
-        dex.setScore(Integer.parseInt(txt_dex.getText()));
-        con.setScore(Integer.parseInt(txt_con.getText()));
-        iNt.setScore(Integer.parseInt(txt_int.getText()));
-        wis.setScore(Integer.parseInt(txt_wis.getText()));
-        cha.setScore(Integer.parseInt(txt_cha.getText()));
+        str.setScore(txt_str.getText());
+        dex.setScore(txt_dex.getText());
+        con.setScore(txt_con.getText());
+        iNt.setScore(txt_int.getText());
+        wis.setScore(txt_wis.getText());
+        cha.setScore(txt_cha.getText());
         //adicionando atributos ao player
         player.setStr(str);
         player.setDex(dex);
@@ -750,8 +750,8 @@ public class TelaAddChar extends javax.swing.JFrame {
         String aux = txta_inv.getText();
         player.getInventario().setInv(aux);
         //adicionando as magias
-        player.getSpellbook().setSpellAtk(Integer.parseInt(txt_spellatk.getText()));
-        player.getSpellbook().setSpellDc(Integer.parseInt(txt_spelldc.getText()));
+        player.getSpellbook().setSpellAtk(txt_spellatk.getText());
+        player.getSpellbook().setSpellDc(txt_spelldc.getText());
         player.getSpellbook().setSpells(txta_magias.getText());
         //adicionando notas
         player.setNotas(txta_notas.getText());

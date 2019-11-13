@@ -5,16 +5,17 @@
  */
 package br.inatel.proj.Model.itens;
 
-import br.inatel.proj.Model.Dice;
+import java.io.Serializable;
 
 /**
  *
  * @author burns
  */
-public class Arma {
+public class Arma implements Serializable{
+
     private String name;
     private int mod;
-    private Dice damage = new Dice();
+    private String damage;
     private String damageType;
     private int range;
     private String properties;
@@ -22,16 +23,16 @@ public class Arma {
 
     @Override
     public String toString() {
-        String aux = "Name: "+name+"\n"
-                + "Damage: "+"+"+mod+" "+damage.toString()+"\n"
-                + "Damage Type: "+damageType+"\n"
-                + "Properties: "+properties+"\n"
-                + "Range: "+range+" feet"+"\n";
-        
-        if(isMelee){
+        String aux = "Name: " + name + "\n"
+                + "Damage: " + "+" + mod + " " + damage + "\n"
+                + "Damage Type: " + damageType + "\n"
+                + "Properties: " + properties + "\n"
+                + "Range: " + range + " feet" + "\n";
+
+        if (isMelee) {
             aux = aux + "Melee \n";
         }
-        
+
         return aux;
     }
 
@@ -49,14 +50,6 @@ public class Arma {
 
     public void setMod(int mod) {
         this.mod = mod;
-    }
-
-    public Dice getDamage() {
-        return damage;
-    }
-
-    public void setDamage(Dice damage) {
-        this.damage = damage;
     }
 
     public String getDamageType() {
@@ -90,8 +83,5 @@ public class Arma {
     public void setIsMelee(boolean isMelee) {
         this.isMelee = isMelee;
     }
-    
-    
-    
-    
+
 }

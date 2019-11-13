@@ -5,28 +5,30 @@
  */
 package br.inatel.proj.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author burns
  */
-public class Grimorio {
-    private int spellAtk;
-    private int spellDc;
+public class Grimorio implements Serializable{
+    private String spellAtk;
+    private String spellDc;
     private String Spells;
 
-    public int getSpellAtk() {
+    public String getSpellAtk() {
         return spellAtk;
     }
 
-    public void setSpellAtk(int spellAtk) {
+    public void setSpellAtk(String spellAtk) {
         this.spellAtk = spellAtk;
     }
 
-    public int getSpellDc() {
+    public String getSpellDc() {
         return spellDc;
     }
 
-    public void setSpellDc(int spellDc) {
+    public void setSpellDc(String spellDc) {
         this.spellDc = spellDc;
     }
 
@@ -37,6 +39,8 @@ public class Grimorio {
     public void setSpells(String Spells) {
         this.Spells = Spells;
     }
+
+   
     
     
 }
