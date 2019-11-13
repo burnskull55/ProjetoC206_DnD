@@ -5,6 +5,8 @@
  */
 package br.inatel.proj.Model;
 
+import java.io.Serializable;
+
 
 
 
@@ -12,7 +14,7 @@ package br.inatel.proj.Model;
  *
  * @author burns
  */
-public abstract class Actor {
+public abstract class Actor implements Serializable{
     protected String nome;
     protected String race;
     protected String backGround;

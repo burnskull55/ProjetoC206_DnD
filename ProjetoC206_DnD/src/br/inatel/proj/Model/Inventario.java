@@ -13,15 +13,25 @@ import br.inatel.proj.Model.itens.Pack;
  *
  * @author burns
  */
-class Inventario {
+public class Inventario {
     private Pack pack = new Pack();
     private Consumables consumables = new Consumables();
     private Arma arma = new Arma();
+    private String inv;
+    
 
     @Override
     public String toString() {
         return "Inventario: \n"
                 + arma.toString() + consumables.toString();
+    }
+
+    public String getInv() {
+        return inv;
+    }
+
+    public void setInv(String inv) {
+        this.inv = inv;
     }
     
     

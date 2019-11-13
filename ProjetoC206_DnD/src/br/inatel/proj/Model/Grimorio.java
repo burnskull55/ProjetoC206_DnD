@@ -12,10 +12,31 @@ package br.inatel.proj.Model;
 public class Grimorio {
     private int spellAtk;
     private int spellDc;
-    private int cantrips;
-    private int spellSlot1;
-    private int spellSlot2;
-    private int spellSlot3;
-    private int spellSlot4;
-    private int spellSlot5;
+    private String Spells;
+
+    public int getSpellAtk() {
+        return spellAtk;
+    }
+
+    public void setSpellAtk(int spellAtk) {
+        this.spellAtk = spellAtk;
+    }
+
+    public int getSpellDc() {
+        return spellDc;
+    }
+
+    public void setSpellDc(int spellDc) {
+        this.spellDc = spellDc;
+    }
+
+    public String getSpells() {
+        return Spells;
+    }
+
+    public void setSpells(String Spells) {
+        this.Spells = Spells;
+    }
+    
+    
 }

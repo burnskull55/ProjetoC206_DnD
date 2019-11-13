@@ -36,8 +36,10 @@ public class TelaMesas extends javax.swing.JFrame {
     private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
     private static DungeonMaster dmstatic = new DungeonMaster();//dungeon master dono dessa mesa
+    private String userName;
+
     private boolean tag = false;
-    
+
     private DefaultListModel dlm = new DefaultListModel();
 
     /**
@@ -50,9 +52,10 @@ public class TelaMesas extends javax.swing.JFrame {
         getRootPane().setDefaultButton(btn_login);
 
         TelaMesas.dmstatic = dm;
-        arquivo = new ArquivoMesas(dmstatic.getUserName());
-        
+        userName = dmstatic.getUserName();
+        arquivo = new ArquivoMesas(userName);
 
+        mesas = arquivo.ler();
     }
 
     /**
@@ -236,6 +239,7 @@ public class TelaMesas extends javax.swing.JFrame {
         Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
         String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
         mesa.setNome(aux);
+        mesa.setUserName(userName);
 
         if (isUnique(mesa)) {
             // se nao existir cai aqui
@@ -258,7 +262,7 @@ public class TelaMesas extends javax.swing.JFrame {
         /*apartir daqui o onjeto this.mesa ja tem a mesa selecionada pelo usuario 
         TODO chamar uma tela de controle mesa 
         fazer o mesmo processo de um item statico para elas , passando como parametro o onjeto this.mesa modificado nessa funçao
-        */
+         */
         TelaControleMesa telaControle = new TelaControleMesa(this.mesa);
         telaControle.setVisible(true);
         this.dispose();
@@ -268,7 +272,7 @@ public class TelaMesas extends javax.swing.JFrame {
 
         mesas = arquivo.ler();
         Collections.sort(mesas);
-        
+
         if (tag == false) {
             for (Mesa mesa1 : mesas) {    //Percorre o Arquivo
                 //Adiciona na lista os atributos da classe Pessoa
@@ -294,34 +298,33 @@ public class TelaMesas extends javax.swing.JFrame {
         return true;
     }
 
-
     private void salvarDados(Mesa mesa) {
         mesas.add(mesa);
         System.out.println(arquivo.getAutor());
         for (Mesa mesa1 : mesas) {
             System.out.println(mesa1.getNome());
         }
-        
-        
+
         arquivo.salvarArquivo(mesas);
-        
+
     }
 
     /**
-     * 
-     * @param aux a string recebida pela jlist , seleciona o nome da mesa q eh buscada
-     * o metodo usa a variavel global this.mesa para receber a mesa com o nome selecionado
+     *
+     * @param aux a string recebida pela jlist , seleciona o nome da mesa q eh
+     * buscada o metodo usa a variavel global this.mesa para receber a mesa com
+     * o nome selecionado
      */
     private void findTable(String aux) {
         boolean find = false;
         for (Mesa mesa1 : mesas) {
-            if(mesa1.getNome().equals(aux)){
+            if (mesa1.getNome().equals(aux)) {
                 this.mesa = mesa1;
                 find = true;
-                
+
             }
         }
-        if(!find){
+        if (!find) {
             System.out.println("wtf");
         }
     }

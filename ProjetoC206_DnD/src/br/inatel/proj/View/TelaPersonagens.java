@@ -5,8 +5,9 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoMesas;
 import br.inatel.proj.Model.Mesa;
-import br.inatel.proj.Model.Character;
+import br.inatel.proj.Model.Chara;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -18,23 +19,33 @@ import javax.xml.bind.annotation.XmlElement;
  */
 public class TelaPersonagens extends javax.swing.JFrame {
 
-    private static Mesa mesa = new Mesa();
-    private ArrayList<Character> chars = new ArrayList(); 
+    private ArquivoMesas arquivo;
+
+    private static Mesa mesa = new Mesa();//mesa herdada da tela de controle 
+    private ArrayList<Mesa> mesas = new ArrayList();
+
+    private ArrayList<Chara> chars = new ArrayList();
     private DefaultListModel dlm = new DefaultListModel();
-    
+    private static String userName;
+
     /**
      * Creates new form TelaPersonagens
      */
     public TelaPersonagens(Mesa mesa) {
         initComponents();
         this.setLocationRelativeTo(null);
+
         this.mesa = mesa;
         chars = mesa.getCharacters();
-        
-        for (Character aChar : chars) {
+
+        arquivo = new ArquivoMesas(this.mesa.getUserName());
+
+        this.mesas = arquivo.ler();
+
+        for (Chara aChar : chars) {
             this.dlm.addElement(aChar.getNome());
         }
-              
+
     }
 
     /**
@@ -240,11 +251,39 @@ public class TelaPersonagens extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void callAddChar() {
-        
-        
+        TelaAddChar telaAddC = new TelaAddChar(this.mesa);
+        telaAddC.setVisible(true);
+        this.dispose();
+
     }
 
     private void callSelectList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void salvarDados(Mesa mesa) {
+        mesas.add(mesa);
+        System.out.println(arquivo.getAutor());
+        for (Mesa mesa1 : mesas) {
+            System.out.println(mesa1.getNome());
+        }
+
+        arquivo.salvarArquivo(mesas);
+
+    }
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(aux)) {
+                this.mesa = mesa1;
+                find = true;
+
+            }
+        }
+        if (!find) {
+            System.out.println("wtf");
+        }
+    }
+
 }

@@ -16,8 +16,9 @@ import java.util.ArrayList;
 public class Mesa implements Serializable, Comparable<Mesa>{
     
     //public TelaControleMesa tela = new TelaControleMesa();
+    private String userName;
     private String nome;
-    private ArrayList<Character> characters = new ArrayList();
+    private ArrayList<Chara> characters = new ArrayList();
     private ArrayList<Monstro> monstros = new ArrayList();
     private ArrayList<Npc> npcs = new ArrayList();
     
@@ -25,11 +26,20 @@ public class Mesa implements Serializable, Comparable<Mesa>{
         
     }
 
-    public ArrayList<Character> getCharacters() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    
+    public ArrayList<Chara> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(ArrayList<Character> characters) {
+    public void setCharacters(ArrayList<Chara> characters) {
         this.characters = characters;
     }
 

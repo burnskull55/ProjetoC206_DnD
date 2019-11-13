@@ -5,22 +5,25 @@
  */
 package br.inatel.proj.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author burns
  */
-public class Character extends Actor{
+public class Chara extends Actor implements Serializable,Comparable<Chara>{
+
     private String classe;
     private int initiative;
     private int speed;
     private int level;
     private int ac;
     private int proficiency;
-    
+
     private int goldP;
     private int copperP;
     private int silverP;
-    
+
     private Atribute str = new Atribute();
     private Atribute dex = new Atribute();
     private Atribute con = new Atribute();
@@ -28,40 +31,48 @@ public class Character extends Actor{
     private Atribute wis = new Atribute();
     private Atribute cha = new Atribute();
     private Dice hitDice = new Dice();
+
     private Inventario inventario = new Inventario();
     private Grimorio spellbook = new Grimorio();
+    private String notas;
 
-   
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
     public String showChar() {
-        String aux = "Char: "+nome+"\n"
-                + "Race: "+race+"\n"
-                + "Class: "+classe+"\n"
-                + "Level: "+level+"\n"
-                + "Background: "+backGround+"\n"
-                + "Alignment: "+alignment+"\n"
-                + "Total HP: "+hp+"\n";
+        String aux = "Char: " + nome + "\n"
+                + "Race: " + race + "\n"
+                + "Class: " + classe + "\n"
+                + "Level: " + level + "\n"
+                + "Background: " + backGround + "\n"
+                + "Alignment: " + alignment + "\n"
+                + "Total HP: " + hp + "\n";
         return aux;
     }
-    public String showCombat(){
-        String aux = "Iniciative: "+initiative+"\n"
-                + "Speed: "+speed+"\n"
-                + "Armor Class: "+ac+"\n"
-                + "Proficiency: "+proficiency+"\n";
+
+    public String showCombat() {
+        String aux = "Iniciative: " + initiative + "\n"
+                + "Speed: " + speed + "\n"
+                + "Armor Class: " + ac + "\n"
+                + "Proficiency: " + proficiency + "\n";
         return aux;
     }
-    public String showAtributos(){
-        String aux = "str: "+str+"\n"
-                + "dex: "+dex+"\n"
-                + "con: "+con+"\n"
-                + "int: "+iNt+"\n"
-                + "wis: "+wis+"\n"
-                + "cha: "+cha+"\n";
+
+    public String showAtributos() {
+        String aux = "str: " + str + "\n"
+                + "dex: " + dex + "\n"
+                + "con: " + con + "\n"
+                + "int: " + iNt + "\n"
+                + "wis: " + wis + "\n"
+                + "cha: " + cha + "\n";
         return aux;
     }
-    
-    
-    
-    
+
     //get and set
     public String getClasse() {
         return classe;
@@ -246,6 +257,10 @@ public class Character extends Actor{
     public void setHp(int hp) {
         this.hp = hp;
     }
-    
-    
+
+    @Override
+    public int compareTo(Chara o) {
+        return this.getNome().compareTo(o.getNome());
+    }
+
 }
