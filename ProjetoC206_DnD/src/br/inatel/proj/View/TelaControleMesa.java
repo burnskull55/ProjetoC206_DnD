@@ -5,17 +5,27 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Model.Mesa;
+import sun.security.jgss.spi.MechanismFactory;
+
 /**
  *
  * @author burns
  */
 public class TelaControleMesa extends javax.swing.JFrame {
 
+    private static Mesa mesa = new Mesa();
     /**
      * Creates new form TelaControleMesa
      */
-    public TelaControleMesa() {
+    public TelaControleMesa(Mesa mesa) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.mesa = mesa;
+        
+        lbl_charcounter1.setText(this.mesa.getCharacters().size()+"");
+        lbl_monstercounter.setText(this.mesa.getMonstros().size()+"");
+        lbl_npcounter.setText(this.mesa.getNpcs().size()+"");
     }
 
     /**
@@ -43,15 +53,35 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
         btn_personagens.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_personagens.setText("Personagens");
+        btn_personagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_personagensActionPerformed(evt);
+            }
+        });
 
         btn_monstros.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_monstros.setText("Monstros");
+        btn_monstros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_monstrosActionPerformed(evt);
+            }
+        });
 
         btn_npcs.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_npcs.setText("Npcs");
+        btn_npcs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_npcsActionPerformed(evt);
+            }
+        });
 
         btn_combate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_combate.setText("Combate");
+        btn_combate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_combateActionPerformed(evt);
+            }
+        });
 
         lbl_imagem.setText("imagem placeholder");
 
@@ -126,6 +156,22 @@ public class TelaControleMesa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_personagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_personagensActionPerformed
+        callChar();
+    }//GEN-LAST:event_btn_personagensActionPerformed
+
+    private void btn_npcsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_npcsActionPerformed
+        callNpc();
+    }//GEN-LAST:event_btn_npcsActionPerformed
+
+    private void btn_monstrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_monstrosActionPerformed
+        callMonster();
+    }//GEN-LAST:event_btn_monstrosActionPerformed
+
+    private void btn_combateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_combateActionPerformed
+        callCombat();
+    }//GEN-LAST:event_btn_combateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,7 +202,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaControleMesa().setVisible(true);
+                new TelaControleMesa(mesa).setVisible(true);
             }
         });
     }
@@ -172,4 +218,22 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_monstercounter;
     private javax.swing.JLabel lbl_npcounter;
     // End of variables declaration//GEN-END:variables
+
+    private void callChar() {
+        TelaPersonagens telaChar = new TelaPersonagens(this.mesa);
+        telaChar.setVisible(true);        
+        this.dispose();
+    }
+
+    private void callNpc() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void callMonster() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void callCombat() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

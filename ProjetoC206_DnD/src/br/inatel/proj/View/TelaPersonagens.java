@@ -5,17 +5,36 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Model.Mesa;
+import br.inatel.proj.Model.Character;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.xml.bind.annotation.XmlElement;
+
 /**
  *
  * @author burns
  */
 public class TelaPersonagens extends javax.swing.JFrame {
 
+    private static Mesa mesa = new Mesa();
+    private ArrayList<Character> chars = new ArrayList(); 
+    private DefaultListModel dlm = new DefaultListModel();
+    
     /**
      * Creates new form TelaPersonagens
      */
-    public TelaPersonagens() {
+    public TelaPersonagens(Mesa mesa) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.mesa = mesa;
+        chars = mesa.getCharacters();
+        
+        for (Character aChar : chars) {
+            this.dlm.addElement(aChar.getNome());
+        }
+              
     }
 
     /**
@@ -29,7 +48,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList_chars = new javax.swing.JList<>();
         lbl_imgPersonagens = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -44,13 +63,10 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personagens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
 
-        jList1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jList_chars.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_chars.setModel(dlm
+        );
+        jScrollPane1.setViewportView(jList_chars);
 
         lbl_imgPersonagens.setText("img placeholder");
 
@@ -60,9 +76,19 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         btn_selectChar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btn_selectChar.setText("Selecionar");
+        btn_selectChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_selectCharActionPerformed(evt);
+            }
+        });
 
         btn_Addchar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btn_Addchar.setText("Adicionar Personagem");
+        btn_Addchar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AddcharActionPerformed(evt);
+            }
+        });
 
         btn_criarchar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btn_criarchar.setText("Criar Personagem");
@@ -155,6 +181,14 @@ public class TelaPersonagens extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_showAtributesActionPerformed
 
+    private void btn_AddcharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddcharActionPerformed
+        callAddChar();
+    }//GEN-LAST:event_btn_AddcharActionPerformed
+
+    private void btn_selectCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectCharActionPerformed
+        callSelectList();
+    }//GEN-LAST:event_btn_selectCharActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,7 +219,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPersonagens().setVisible(true);
+                new TelaPersonagens(mesa).setVisible(true);
             }
         });
     }
@@ -197,11 +231,20 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private javax.swing.JButton btn_showAtributes;
     private javax.swing.JButton btn_showChar;
     private javax.swing.JButton btn_showCombat;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList_chars;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_imgPersonagens;
     // End of variables declaration//GEN-END:variables
+
+    private void callAddChar() {
+        
+        
+    }
+
+    private void callSelectList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -258,8 +258,10 @@ public class TelaMesas extends javax.swing.JFrame {
         /*apartir daqui o onjeto this.mesa ja tem a mesa selecionada pelo usuario 
         TODO chamar uma tela de controle mesa 
         fazer o mesmo processo de um item statico para elas , passando como parametro o onjeto this.mesa modificado nessa funçao
-        
         */
+        TelaControleMesa telaControle = new TelaControleMesa(this.mesa);
+        telaControle.setVisible(true);
+        this.dispose();
     }
 
     private void listaInit() {
@@ -271,13 +273,11 @@ public class TelaMesas extends javax.swing.JFrame {
             for (Mesa mesa1 : mesas) {    //Percorre o Arquivo
                 //Adiciona na lista os atributos da classe Pessoa
                 dlm.addElement(mesa1.getNome());
-                dlm.addElement("------------------------------------");
             }
         } else {
             dlm.clear();
             for (Mesa mesa1 : mesas) {
                 dlm.addElement(mesa1.getNome());
-                dlm.addElement("------------------------------------");
             }
         }
 
@@ -307,6 +307,11 @@ public class TelaMesas extends javax.swing.JFrame {
         
     }
 
+    /**
+     * 
+     * @param aux a string recebida pela jlist , seleciona o nome da mesa q eh buscada
+     * o metodo usa a variavel global this.mesa para receber a mesa com o nome selecionado
+     */
     private void findTable(String aux) {
         boolean find = false;
         for (Mesa mesa1 : mesas) {

@@ -25,6 +25,31 @@ public class Mesa implements Serializable, Comparable<Mesa>{
         
     }
 
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(ArrayList<Character> characters) {
+        this.characters = characters;
+    }
+
+    public ArrayList<Monstro> getMonstros() {
+        return monstros;
+    }
+
+    public void setMonstros(ArrayList<Monstro> monstros) {
+        this.monstros = monstros;
+    }
+
+    public ArrayList<Npc> getNpcs() {
+        return npcs;
+    }
+
+    public void setNpcs(ArrayList<Npc> npcs) {
+        this.npcs = npcs;
+    }
+
+    
     
     public String getNome() {
         return nome;
