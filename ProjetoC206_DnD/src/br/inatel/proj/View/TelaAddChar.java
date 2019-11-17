@@ -11,6 +11,7 @@ import br.inatel.proj.Model.Atribute;
 import br.inatel.proj.Model.Chara;
 import br.inatel.proj.Model.Mesa;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,10 @@ public class TelaAddChar extends javax.swing.JFrame {
 
     private static Mesa mesa = new Mesa();//mesa herdada da tela de controle 
     private ArrayList<Mesa> mesas = new ArrayList();
+    private ArrayList<Chara> chars = new ArrayList();
     private Chara player = new Chara();//variavel aux para manipular os valores lidos
+
+    private int index;
 
     /**
      * Creates new form TelaAddChar
@@ -31,10 +35,30 @@ public class TelaAddChar extends javax.swing.JFrame {
     public TelaAddChar(Mesa mesa) {
         initComponents();
         this.setLocationRelativeTo(null);
-
         this.mesa = mesa;
         arquivo = new ArquivoMesas(this.mesa.getUserName());
+        mesas = arquivo.ler();
 
+    }
+
+    public TelaAddChar(Chara chara) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.mesa = mesa;
+        arquivo = new ArquivoMesas(this.mesa.getUserName());
+        mesas = arquivo.ler();
+
+        for (Chara aChar : chars) {
+            if (chara.equals(aChar)) {
+                this.player = aChar;
+            }
+        }
+
+
+        initForEdit();
+
+        mesas.remove(player);
+        arquivo.salvarArquivo(mesas);
     }
 
     /**
@@ -694,70 +718,60 @@ public class TelaAddChar extends javax.swing.JFrame {
         lerdados();
     }
 
-    private void findTable(String aux) {
-        boolean find = false;
-        for (Mesa mesa1 : mesas) {
-            if (mesa1.getNome().equals(aux)) {
-                this.mesa = mesa1;
-                find = true;
-
-            }
-        }
-        if (!find) {
-            System.out.println("wtf");
-        }
-    }
-
     private void lerdados() {
         //entrado com os valores de pessoal
-        player.setNome(txt_nome.getText());
-        player.setRace(txt_race.getText());
-        player.setBackGround(txt_background.getText());
-        player.setAlignment(txt_alignmemt.getText());
-        player.setHp(txt_hp.getText());
-        //entrando com os valores de info
-        player.setClasse(txt_classe.getText());
-        player.setLevel(txt_nivel.getText());
-        player.setSpeed(txt_movimento.getText());
-        player.setInitiative(txt_iniciativa.getText());
-        player.setAc(txt_ac.getText());
-        player.setProficiency(txt_prof.getText());
-        player.setGoldP(txt_gold.getText());
-        player.setSilverP(txt_silver.getText());
-        player.setCopperP(txt_copper.getText());
+        if (!txt_nome.getText().equals("")) {
+            player.setNome(txt_nome.getText());
+            player.setRace(txt_race.getText());
+            player.setBackGround(txt_background.getText());
+            player.setAlignment(txt_alignmemt.getText());
+            player.setHp(txt_hp.getText());
+            //entrando com os valores de info
+            player.setClasse(txt_classe.getText());
+            player.setLevel(txt_nivel.getText());
+            player.setSpeed(txt_movimento.getText());
+            player.setInitiative(txt_iniciativa.getText());
+            player.setAc(txt_ac.getText());
+            player.setProficiency(txt_prof.getText());
+            player.setGoldP(txt_gold.getText());
+            player.setSilverP(txt_silver.getText());
+            player.setCopperP(txt_copper.getText());
 
-        //criando atributos aux para colocar em player
-        Atribute str = new Atribute();
-        Atribute dex = new Atribute();
-        Atribute con = new Atribute();
-        Atribute iNt = new Atribute();
-        Atribute wis = new Atribute();
-        Atribute cha = new Atribute();
-        str.setScore(txt_str.getText());
-        dex.setScore(txt_dex.getText());
-        con.setScore(txt_con.getText());
-        iNt.setScore(txt_int.getText());
-        wis.setScore(txt_wis.getText());
-        cha.setScore(txt_cha.getText());
-        //adicionando atributos ao player
-        player.setStr(str);
-        player.setDex(dex);
-        player.setCon(con);
-        player.setiNt(iNt);
-        player.setWis(wis);
-        player.setCha(cha);
-        //adicionando a string do inventario
-        String aux = txta_inv.getText();
-        player.getInventario().setInv(aux);
-        //adicionando as magias
-        player.getSpellbook().setSpellAtk(txt_spellatk.getText());
-        player.getSpellbook().setSpellDc(txt_spelldc.getText());
-        player.getSpellbook().setSpells(txta_magias.getText());
-        //adicionando notas
-        player.setNotas(txta_notas.getText());
+            //criando atributos aux para colocar em player
+            Atribute str = new Atribute();
+            Atribute dex = new Atribute();
+            Atribute con = new Atribute();
+            Atribute iNt = new Atribute();
+            Atribute wis = new Atribute();
+            Atribute cha = new Atribute();
+            str.setScore(txt_str.getText());
+            dex.setScore(txt_dex.getText());
+            con.setScore(txt_con.getText());
+            iNt.setScore(txt_int.getText());
+            wis.setScore(txt_wis.getText());
+            cha.setScore(txt_cha.getText());
+            //adicionando atributos ao player
+            player.setStr(str);
+            player.setDex(dex);
+            player.setCon(con);
+            player.setiNt(iNt);
+            player.setWis(wis);
+            player.setCha(cha);
+            //adicionando a string do inventario
+            String aux = txta_inv.getText();
+            player.getInventario().setInv(aux);
+            //adicionando as magias
+            player.getSpellbook().setSpellAtk(txt_spellatk.getText());
+            player.getSpellbook().setSpellDc(txt_spelldc.getText());
+            player.getSpellbook().setSpells(txta_magias.getText());
+            //adicionando notas
+            player.setNotas(txta_notas.getText());
 
-        //chama a funçao q salva o player na mesa como um novo jogador
-        salvaPlayer();
+            //chama a funçao q salva o player na mesa como um novo jogador
+            salvaPlayer();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "pelomenos o nome deve ser preenchido");
+        }
     }
 
     private void salvaPlayer() {
@@ -765,5 +779,38 @@ public class TelaAddChar extends javax.swing.JFrame {
         mesas.add(mesa);
         arquivo.salvarArquivo(mesas);
         cancel();
+    }
+
+    private void initForEdit() {
+        txt_nome.setText(player.getNome());
+        txt_race.setText(player.getRace());
+        txt_background.setText(player.getBackGround());
+        txt_alignmemt.setText(player.getAlignment());
+        txt_hp.setText(player.getHp());
+        //entrando com os valores de info
+        txt_classe.setText(player.getClasse());
+        txt_nivel.setText(player.getLevel());
+        txt_movimento.setText(player.getSpeed());
+        txt_iniciativa.setText(player.getInitiative());
+        txt_ac.setText(player.getAc());
+        txt_prof.setText(player.getProficiency());
+        txt_gold.setText(player.getGoldP());
+        txt_silver.setText(player.getSilverP());
+        txt_copper.setText(player.getCopperP());
+        //atributos
+        txt_str.setText(player.getStr().getScore());
+        txt_dex.setText(player.getDex().getScore());
+        txt_con.setText(player.getCon().getScore());
+        txt_int.setText(player.getiNt().getScore());
+        txt_wis.setText(player.getWis().getScore());
+        txt_cha.setText(player.getCha().getScore());
+        //inventario
+        txta_inv.setText(player.getInventario().getInv());
+        //magias
+        txta_magias.setText(player.getSpellbook().getSpells());
+        txt_spellatk.setText(player.getSpellbook().getSpellAtk());
+        txt_spelldc.setText(player.getSpellbook().getSpellDc());
+        //notas
+        txta_notas.setText(player.getNotas());
     }
 }

@@ -55,12 +55,12 @@ public class Chara extends Actor implements Serializable, Comparable<Chara> {
     }
 
     public String showAtributos() {
-        String aux = "str: " + str + "\n"
-                + "dex: " + dex + "\n"
-                + "con: " + con + "\n"
-                + "int: " + iNt + "\n"
-                + "wis: " + wis + "\n"
-                + "cha: " + cha + "\n";
+        String aux = "str: " + str.getScore() + "\n"
+                + "dex: " + dex.getScore() + "\n"
+                + "con: " + con.getScore() + "\n"
+                + "int: " + iNt.getScore() + "\n"
+                + "wis: " + wis.getScore() + "\n"
+                + "cha: " + cha.getScore() + "\n";
         return aux;
     }
 
