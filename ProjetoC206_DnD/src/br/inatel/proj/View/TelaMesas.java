@@ -236,15 +236,15 @@ public class TelaMesas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void criaMesa() {
-        Mesa mesa = new Mesa();//cria uma mesa aux para ser inserida no arquivo
+        Mesa mesa1 = new Mesa();//cria uma mesa aux para ser inserida no arquivo
         String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
-        mesa.setNome(aux);
-        mesa.setUserName(userName);
+        mesa1.setNome(aux);
+        mesa1.setUserName(userName);
 
-        if (isUnique(mesa)) {
+        if (isUnique(mesa1)) {
             // se nao existir cai aqui
             // salva os dados
-            salvarDados(mesa);
+            salvarDados(mesa1);
         } else {
             // Caso esteja errado emite um Erro
             String msg = "Mesa já cadastrada!";
@@ -300,11 +300,6 @@ public class TelaMesas extends javax.swing.JFrame {
 
     private void salvarDados(Mesa mesa) {
         mesas.add(mesa);
-        System.out.println(arquivo.getAutor());
-        for (Mesa mesa1 : mesas) {
-            System.out.println(mesa1.getNome());
-        }
-
         arquivo.salvarArquivo(mesas);
 
     }

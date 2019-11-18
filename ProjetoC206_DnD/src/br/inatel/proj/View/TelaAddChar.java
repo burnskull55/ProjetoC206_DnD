@@ -22,10 +22,10 @@ public class TelaAddChar extends javax.swing.JFrame {
     private ArquivoMesas arquivo;
 
     private static Mesa mesa = new Mesa();//mesa herdada da tela de controle 
+    private String username;
     private ArrayList<Mesa> mesas = new ArrayList();
     private ArrayList<Chara> chars = new ArrayList();
     private Chara player = new Chara();//variavel aux para manipular os valores lidos
-
     private int index;
 
     /**
@@ -36,7 +36,12 @@ public class TelaAddChar extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.mesa = mesa;
-        arquivo = new ArquivoMesas(this.mesa.getUserName());
+
+        username = this.mesa.getUserName();
+        chars = this.mesa.getCharacters();
+
+        arquivo = new ArquivoMesas(username);
+
         mesas = arquivo.ler();
 
     }
@@ -53,7 +58,6 @@ public class TelaAddChar extends javax.swing.JFrame {
                 this.player = aChar;
             }
         }
-
 
         initForEdit();
 
@@ -774,7 +778,7 @@ public class TelaAddChar extends javax.swing.JFrame {
         }
     }
 
-    private void salvaPlayer() {
+    private void salvaPlayer() {//HERE
         mesa.getCharacters().add(player);
         mesas.add(mesa);
         arquivo.salvarArquivo(mesas);

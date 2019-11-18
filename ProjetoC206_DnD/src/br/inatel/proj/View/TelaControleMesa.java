@@ -20,6 +20,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
     private static Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
     private ArrayList<Mesa> mesas = new ArrayList();
+    private String username;
 
     /**
      * Creates new form TelaControleMesa
@@ -28,8 +29,9 @@ public class TelaControleMesa extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.mesa = mesa;
+        username = this.mesa.getUserName();
 
-        arquivo = new ArquivoMesas(this.mesa.getUserName());
+        arquivo = new ArquivoMesas(username);
         mesas = arquivo.ler();
 
         lbl_charcounter1.setText(this.mesa.getCharacters().size() + "");

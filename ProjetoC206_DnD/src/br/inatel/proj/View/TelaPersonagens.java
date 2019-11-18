@@ -27,6 +27,8 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private ArrayList<Chara> chars = new ArrayList();
     private DefaultListModel dlm = new DefaultListModel();
     private Chara achar = new Chara();
+    private String username;
+    private String mesaName;
     private int index;
 
     /**
@@ -35,10 +37,12 @@ public class TelaPersonagens extends javax.swing.JFrame {
     public TelaPersonagens(Mesa mesa) {
         initComponents();
         this.setLocationRelativeTo(null);
-        arquivo = new ArquivoMesas(this.mesa.getUserName());
         this.mesa = mesa;
-        chars = mesa.getCharacters();
+        username = this.mesa.getUserName();
+        chars = this.mesa.getCharacters();
+        mesaName = this.mesa.getNome();
 
+        arquivo = new ArquivoMesas(this.mesa.getUserName());
         this.mesas = arquivo.ler();
 
         //preenchendo a lista
@@ -332,8 +336,18 @@ public class TelaPersonagens extends javax.swing.JFrame {
     }
 
     private void listar() {
-        for (Chara characters : mesa.getCharacters()) {
-            dlm.addElement(characters.getNome());
+
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(this.mesaName)) {
+                this.chars = mesa1.getCharacters();
+                for (Chara aChar : chars) {
+                    dlm.addElement(achar.getNome());
+                }
+
+            }
+            else{
+                System.out.println("wtf wtf wtf");
+            }
         }
 
     }
@@ -375,7 +389,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private void editar() {
+    private void editar() {//TODO
         findChar();
         if (!this.achar.getNome().equals("nop")) {
             TelaAddChar tela = new TelaAddChar(this.achar);
@@ -389,11 +403,12 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private void exluir() {
         //findChar();
         String aux = jList_chars.getSelectedValue();
+
         if (aux != null) {
 
-            for (Chara char1 : mesa.getCharacters()) {
+            for (Chara char1 : chars) {
                 if (char1.getNome().equals(aux)) {
-                    index = mesa.getCharacters().indexOf(char1);
+                    index = chars.indexOf(char1);
                     String msg = "Deseja remover o personagem: " + char1.getNome() + "?";
 
                     int op = JOptionPane.showConfirmDialog(jScrollPane1, msg, "Excluir", JOptionPane.WARNING_MESSAGE);
