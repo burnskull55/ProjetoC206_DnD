@@ -21,29 +21,32 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
     private ArquivoMesas arquivo;
 
-    private static Mesa mesa = new Mesa();//mesa herdada da tela de controle 
+    private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
 
     private ArrayList<Chara> chars = new ArrayList();
+
     private DefaultListModel dlm = new DefaultListModel();
     private Chara achar = new Chara();
-    private String username;
-    private String mesaName;
+
+    private static String userName;
+    private static String mesaName;
     private int index;
 
     /**
      * Creates new form TelaPersonagens
      */
-    public TelaPersonagens(Mesa mesa) {
+    public TelaPersonagens(String userName, String mesaName) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.mesa = mesa;
-        username = this.mesa.getUserName();
-        chars = this.mesa.getCharacters();
-        mesaName = this.mesa.getNome();
 
-        arquivo = new ArquivoMesas(this.mesa.getUserName());
+        TelaPersonagens.userName = userName;
+        TelaPersonagens.mesaName = mesaName;
+
+        this.arquivo = new ArquivoMesas(TelaPersonagens.userName);
         this.mesas = arquivo.ler();
+        findTable(mesaName);
+        this.chars = this.mesa.getCharacters();
 
         //preenchendo a lista
         listar();
@@ -282,7 +285,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPersonagens(mesa).setVisible(true);
+                new TelaPersonagens(userName, mesaName).setVisible(true);
             }
         });
     }
@@ -304,7 +307,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void callAddChar() {
-        TelaAddChar telaAddC = new TelaAddChar(this.mesa);
+        TelaAddChar telaAddC = new TelaAddChar(userName, mesaName);
         telaAddC.setVisible(true);
         this.dispose();
 
@@ -335,21 +338,10 @@ public class TelaPersonagens extends javax.swing.JFrame {
         }
     }
 
-    private void listar() {
-
-        for (Mesa mesa1 : mesas) {
-            if (mesa1.getNome().equals(this.mesaName)) {
-                this.chars = mesa1.getCharacters();
-                for (Chara aChar : chars) {
-                    dlm.addElement(achar.getNome());
-                }
-
-            }
-            else{
-                System.out.println("wtf wtf wtf");
-            }
+    private void listar() { //lesta os personagens na jlist usando o dlm
+        for (Chara aChar : chars) {
+            dlm.addElement(aChar.getNome());
         }
-
     }
 
     private void findChar() {
@@ -384,7 +376,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     }
 
     private void voltar() {
-        TelaControleMesa tela = new TelaControleMesa(mesa);
+        TelaControleMesa tela = new TelaControleMesa(TelaPersonagens.userName, TelaPersonagens.mesaName);
         tela.setVisible(true);
         this.dispose();
     }
@@ -392,7 +384,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private void editar() {//TODO
         findChar();
         if (!this.achar.getNome().equals("nop")) {
-            TelaAddChar tela = new TelaAddChar(this.achar);
+            TelaAddChar tela = new TelaAddChar(TelaPersonagens.userName , TelaPersonagens.mesaName);
             tela.setVisible(true);
             this.dispose();
         } else {
@@ -404,8 +396,8 @@ public class TelaPersonagens extends javax.swing.JFrame {
         //findChar();
         String aux = jList_chars.getSelectedValue();
 
+        chars = this.mesa.getCharacters();
         if (aux != null) {
-
             for (Chara char1 : chars) {
                 if (char1.getNome().equals(aux)) {
                     index = chars.indexOf(char1);

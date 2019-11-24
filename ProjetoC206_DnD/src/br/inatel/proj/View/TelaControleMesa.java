@@ -18,21 +18,28 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
     private ArquivoMesas arquivo;
 
-    private static Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
+    private Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
     private ArrayList<Mesa> mesas = new ArrayList();
-    private String username;
+    private static String userName;
+    private static String mesaName;
+    
 
     /**
      * Creates new form TelaControleMesa
      */
-    public TelaControleMesa(Mesa mesa) {
+    public TelaControleMesa(String userName,String mesaName) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.mesa = mesa;
-        username = this.mesa.getUserName();
+        
+        TelaControleMesa.userName = userName;
+        TelaControleMesa.mesaName = mesaName;
+        
 
-        arquivo = new ArquivoMesas(username);
+        arquivo = new ArquivoMesas(TelaControleMesa.userName);
         mesas = arquivo.ler();
+        findTable(mesaName);
+       
+        
 
         lbl_charcounter1.setText(this.mesa.getCharacters().size() + "");
         lbl_monstercounter.setText(this.mesa.getMonstros().size() + "");
@@ -57,6 +64,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         lbl_npcounter = new javax.swing.JLabel();
         lbl_charcounter1 = new javax.swing.JLabel();
         lbl_monstercounter = new javax.swing.JLabel();
+        btn_voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +110,14 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
         lbl_monstercounter.setText("monster counter");
 
+        btn_voltar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_mesaphLayout = new javax.swing.GroupLayout(jp_mesaph);
         jp_mesaph.setLayout(jp_mesaphLayout);
         jp_mesaphLayout.setHorizontalGroup(
@@ -109,8 +125,6 @@ public class TelaControleMesa extends javax.swing.JFrame {
             .addGroup(jp_mesaphLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_personagens)
-                    .addComponent(btn_combate)
                     .addGroup(jp_mesaphLayout.createSequentialGroup()
                         .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_npcs)
@@ -122,7 +136,13 @@ public class TelaControleMesa extends javax.swing.JFrame {
                             .addGroup(jp_mesaphLayout.createSequentialGroup()
                                 .addComponent(lbl_charcounter1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                .addComponent(lbl_imagem)))))
+                                .addComponent(lbl_imagem))))
+                    .addGroup(jp_mesaphLayout.createSequentialGroup()
+                        .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_personagens)
+                            .addComponent(btn_combate)
+                            .addComponent(btn_voltar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jp_mesaphLayout.setVerticalGroup(
@@ -144,7 +164,9 @@ public class TelaControleMesa extends javax.swing.JFrame {
                     .addComponent(lbl_monstercounter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_combate)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btn_voltar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,6 +205,10 @@ public class TelaControleMesa extends javax.swing.JFrame {
         callCombat();
     }//GEN-LAST:event_btn_combateActionPerformed
 
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        voltat();
+    }//GEN-LAST:event_btn_voltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,7 +239,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaControleMesa(mesa).setVisible(true);
+                new TelaControleMesa(userName,mesaName).setVisible(true);
             }
         });
     }
@@ -223,6 +249,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private javax.swing.JButton btn_monstros;
     private javax.swing.JButton btn_npcs;
     private javax.swing.JButton btn_personagens;
+    private javax.swing.JButton btn_voltar;
     private javax.swing.JPanel jp_mesaph;
     private javax.swing.JLabel lbl_charcounter1;
     private javax.swing.JLabel lbl_imagem;
@@ -231,7 +258,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void callChar() {
-        TelaPersonagens telaChar = new TelaPersonagens(this.mesa);
+        TelaPersonagens telaChar = new TelaPersonagens(userName , mesaName);
         telaChar.setVisible(true);
         this.dispose();
     }
@@ -271,5 +298,9 @@ public class TelaControleMesa extends javax.swing.JFrame {
         if (!find) {
             System.out.println("wtf");
         }
+    }
+
+    private void voltat() {
+        //unsuported
     }
 }

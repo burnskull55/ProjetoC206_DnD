@@ -37,6 +37,7 @@ public class TelaMesas extends javax.swing.JFrame {
     private ArrayList<Mesa> mesas = new ArrayList();
     private static DungeonMaster dmstatic = new DungeonMaster();//dungeon master dono dessa mesa
     private String userName;
+    private String mesaName;
 
     private boolean tag = false;
 
@@ -56,6 +57,8 @@ public class TelaMesas extends javax.swing.JFrame {
         arquivo = new ArquivoMesas(userName);
 
         mesas = arquivo.ler();
+        listar();
+
     }
 
     /**
@@ -74,7 +77,6 @@ public class TelaMesas extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         list_mesas = new javax.swing.JList<>();
-        btn_listar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,14 +109,6 @@ public class TelaMesas extends javax.swing.JFrame {
         list_mesas.setModel(dlm);
         jScrollPane1.setViewportView(list_mesas);
 
-        btn_listar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_listar.setText("Listar");
-        btn_listar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_listarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -123,9 +117,7 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_loginmesa)
-                            .addComponent(btn_listar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_loginmesa)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -144,10 +136,7 @@ public class TelaMesas extends javax.swing.JFrame {
                 .addComponent(lbl_loginTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(lbl_loginmesa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_listar))
+                    .addComponent(lbl_loginmesa)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,10 +172,6 @@ public class TelaMesas extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         selecionaMesa();
     }//GEN-LAST:event_btn_loginActionPerformed
-
-    private void btn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listarActionPerformed
-        listaInit();
-    }//GEN-LAST:event_btn_listarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,7 +210,6 @@ public class TelaMesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_listar;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_novamesa;
     private javax.swing.JScrollPane jScrollPane1;
@@ -236,62 +220,43 @@ public class TelaMesas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void criaMesa() {
-        Mesa mesa1 = new Mesa();//cria uma mesa aux para ser inserida no arquivo
+        Mesa mesaAux = new Mesa();//cria uma mesa aux para ser inserida no arquivo
         String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
-        mesa1.setNome(aux);
-        mesa1.setUserName(userName);
+        mesaAux.setNome(aux);
+        mesaAux.setUserName(userName);
 
-        if (isUnique(mesa1)) {
+     /*   if (isUnique(mesaAux.getNome())) {*/
             // se nao existir cai aqui
             // salva os dados
-            salvarDados(mesa1);
-        } else {
+            salvarDados(mesaAux);
+       /* } else {
             // Caso esteja errado emite um Erro
             String msg = "Mesa já cadastrada!";
             String title = "Mesa já existe!";
             int msgType = JOptionPane.ERROR_MESSAGE;
             JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
 
-        }
+        }*/
+        listar();
 
     }
 
     private void selecionaMesa() {
-        String aux = list_mesas.getSelectedValue();//tring q recebe o valor selecionado da lista 
-        findTable(aux);
+        String mesa = list_mesas.getSelectedValue();//tring q recebe o valor selecionado da lista 
+        findTable(mesa);
         /*apartir daqui o onjeto this.mesa ja tem a mesa selecionada pelo usuario 
         TODO chamar uma tela de controle mesa 
         fazer o mesmo processo de um item statico para elas , passando como parametro o onjeto this.mesa modificado nessa funçao
          */
-        TelaControleMesa telaControle = new TelaControleMesa(this.mesa);
+        TelaControleMesa telaControle = new TelaControleMesa(userName, mesaName);
         telaControle.setVisible(true);
         this.dispose();
     }
 
-    private void listaInit() {
-
+    private boolean isUnique(String nomeDaMesa) {
         mesas = arquivo.ler();
-        Collections.sort(mesas);
-
-        if (tag == false) {
-            for (Mesa mesa1 : mesas) {    //Percorre o Arquivo
-                //Adiciona na lista os atributos da classe Pessoa
-                dlm.addElement(mesa1.getNome());
-            }
-        } else {
-            dlm.clear();
-            for (Mesa mesa1 : mesas) {
-                dlm.addElement(mesa1.getNome());
-            }
-        }
-
-        tag = true;
-
-    }
-
-    private boolean isUnique(Mesa mesa) {
         for (Mesa mesa1 : mesas) {
-            if (mesa1.getNome().equals(mesa.getNome())) {
+            if (mesa1.getNome().equals(nomeDaMesa)) {
                 return false;
             }
         }
@@ -320,7 +285,15 @@ public class TelaMesas extends javax.swing.JFrame {
             }
         }
         if (!find) {
-            System.out.println("wtf");
+            System.out.println("em findtable nao encontramos a mesa no array mesas");
+        }
+    }
+
+    private void listar() {
+        dlm.clear();
+        mesas = arquivo.ler();
+        for (Mesa mesa1 : mesas) {
+            dlm.addElement(mesa1.getNome());
         }
     }
 

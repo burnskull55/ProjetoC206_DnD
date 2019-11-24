@@ -21,10 +21,14 @@ public class TelaAddChar extends javax.swing.JFrame {
 
     private ArquivoMesas arquivo;
 
-    private static Mesa mesa = new Mesa();//mesa herdada da tela de controle 
-    private String username;
+    private Mesa mesa = new Mesa();//mesa herdada da tela de controle 
     private ArrayList<Mesa> mesas = new ArrayList();
+
     private ArrayList<Chara> chars = new ArrayList();
+
+    private static String userName;
+    private static String mesaName;
+
     private Chara player = new Chara();//variavel aux para manipular os valores lidos
     private int index;
 
@@ -32,37 +36,18 @@ public class TelaAddChar extends javax.swing.JFrame {
      * Creates new form TelaAddChar
      *
      */
-    public TelaAddChar(Mesa mesa) {
+    public TelaAddChar(String userName, String mesaName) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.mesa = mesa;
 
-        username = this.mesa.getUserName();
+        TelaAddChar.userName = userName;
+        TelaAddChar.mesaName = mesaName;
+
+        arquivo = new ArquivoMesas(TelaAddChar.userName);
+        mesas = arquivo.ler();
+
+        findTable(mesaName);
         chars = this.mesa.getCharacters();
-
-        arquivo = new ArquivoMesas(username);
-
-        mesas = arquivo.ler();
-
-    }
-
-    public TelaAddChar(Chara chara) {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.mesa = mesa;
-        arquivo = new ArquivoMesas(this.mesa.getUserName());
-        mesas = arquivo.ler();
-
-        for (Chara aChar : chars) {
-            if (chara.equals(aChar)) {
-                this.player = aChar;
-            }
-        }
-
-        initForEdit();
-
-        mesas.remove(player);
-        arquivo.salvarArquivo(mesas);
     }
 
     /**
@@ -643,7 +628,7 @@ public class TelaAddChar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAddChar(mesa).setVisible(true);
+                new TelaAddChar(userName, mesaName).setVisible(true);
             }
         });
     }
@@ -713,7 +698,7 @@ public class TelaAddChar extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cancel() {
-        TelaPersonagens tela = new TelaPersonagens(this.mesa);
+        TelaPersonagens tela = new TelaPersonagens(this.userName, this.mesaName);
         tela.setVisible(true);
         this.dispose();
     }
@@ -816,5 +801,20 @@ public class TelaAddChar extends javax.swing.JFrame {
         txt_spelldc.setText(player.getSpellbook().getSpellDc());
         //notas
         txta_notas.setText(player.getNotas());
+    }
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : this.mesas) {
+            if (mesa1.getNome().equals(aux)) {
+                this.mesa = mesa1;
+                find = true;
+
+            }
+        }
+        
+        if (!find) {
+            System.out.println("wtf");
+        }
     }
 }
