@@ -5,12 +5,20 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.Mesa;
+import java.util.ArrayList;
+
 /**
  *
  * @author burns
  */
 public class TelaMonstros extends javax.swing.JFrame {
 
+    private ArquivoMesas arquivo = new ArquivoMesas();
+    private Mesa mesa = new Mesa();
+    private ArrayList<Mesa> mesas = new ArrayList();
+    
     /**
      * Creates new form TelaMonstros
      */
@@ -27,21 +35,121 @@ public class TelaMonstros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lbl_personagens = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_chars = new javax.swing.JList<>();
+        btn_editar = new javax.swing.JButton();
+        btn_excluir = new javax.swing.JButton();
+        btn_showMonstro = new javax.swing.JButton();
+        btn_AddMonstro = new javax.swing.JButton();
+        btn_voltar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txta_interface = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_personagens.setFont(new java.awt.Font("Sylfaen", 0, 24)); // NOI18N
+        lbl_personagens.setText("Monstros");
+        jPanel1.add(lbl_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 228, -1));
+
+        jList_chars.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_chars.setModel(dlm
+        );
+        jScrollPane1.setViewportView(jList_chars);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 190, 110));
+
+        btn_editar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        btn_excluir.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_excluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        btn_showMonstro.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_showMonstro.setText("Info");
+        btn_showMonstro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_showMonstroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_showMonstro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 140, 30));
+
+        btn_AddMonstro.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_AddMonstro.setText("Adicionar Monstro");
+        btn_AddMonstro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AddMonstroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_AddMonstro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, -1, -1));
+
+        txta_interface.setColumns(20);
+        txta_interface.setRows(5);
+        jScrollPane2.setViewportView(txta_interface);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 224, 280));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        editar();
+    }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        exluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_showMonstroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showMonstroActionPerformed
+        showGeral();
+    }//GEN-LAST:event_btn_showMonstroActionPerformed
+
+    private void btn_AddMonstroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddMonstroActionPerformed
+        callAddChar();
+    }//GEN-LAST:event_btn_AddMonstroActionPerformed
+
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        voltar();
+    }//GEN-LAST:event_btn_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +187,45 @@ public class TelaMonstros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_AddMonstro;
+    private javax.swing.JButton btn_editar;
+    private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_showMonstro;
+    private javax.swing.JButton btn_voltar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList_chars;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_personagens;
+    private javax.swing.JTextArea txta_interface;
     // End of variables declaration//GEN-END:variables
+
+    private void editar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void exluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void showGeral() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void showCombate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void showAtributos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void callAddChar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void voltar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -55,130 +55,85 @@ public class TelaControleMesa extends javax.swing.JFrame {
         btn_monstros = new javax.swing.JButton();
         btn_npcs = new javax.swing.JButton();
         btn_combate = new javax.swing.JButton();
-        lbl_imagem = new javax.swing.JLabel();
         lbl_npcounter = new javax.swing.JLabel();
         lbl_charcounter1 = new javax.swing.JLabel();
         lbl_monstercounter = new javax.swing.JLabel();
         btn_voltar = new javax.swing.JButton();
+        lbl_imagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jp_mesaph.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "mesa_placeholder", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        jp_mesaph.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_personagens.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_personagens.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_personagens.setText("Personagens");
         btn_personagens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_personagensActionPerformed(evt);
             }
         });
+        jp_mesaph.add(btn_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        btn_monstros.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_monstros.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_monstros.setText("Monstros");
         btn_monstros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_monstrosActionPerformed(evt);
             }
         });
+        jp_mesaph.add(btn_monstros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        btn_npcs.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_npcs.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_npcs.setText("Npcs");
         btn_npcs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_npcsActionPerformed(evt);
             }
         });
+        jp_mesaph.add(btn_npcs, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
-        btn_combate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_combate.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_combate.setText("Combate");
         btn_combate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_combateActionPerformed(evt);
             }
         });
+        jp_mesaph.add(btn_combate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
-        lbl_imagem.setText("imagem placeholder");
-
+        lbl_npcounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         lbl_npcounter.setText("npc counter");
+        jp_mesaph.add(lbl_npcounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 60, 30));
 
+        lbl_charcounter1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         lbl_charcounter1.setText("player counter");
+        jp_mesaph.add(lbl_charcounter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 105, 70, 30));
 
+        lbl_monstercounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         lbl_monstercounter.setText("monster counter");
+        jp_mesaph.add(lbl_monstercounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 90, 30));
 
-        btn_voltar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_voltar.setText("Voltar");
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_voltarActionPerformed(evt);
             }
         });
+        jp_mesaph.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
 
-        javax.swing.GroupLayout jp_mesaphLayout = new javax.swing.GroupLayout(jp_mesaph);
-        jp_mesaph.setLayout(jp_mesaphLayout);
-        jp_mesaphLayout.setHorizontalGroup(
-            jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_mesaphLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_mesaphLayout.createSequentialGroup()
-                        .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_npcs)
-                            .addComponent(btn_monstros))
-                        .addGap(47, 47, 47)
-                        .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_monstercounter)
-                            .addComponent(lbl_npcounter)
-                            .addGroup(jp_mesaphLayout.createSequentialGroup()
-                                .addComponent(lbl_charcounter1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                .addComponent(lbl_imagem))))
-                    .addGroup(jp_mesaphLayout.createSequentialGroup()
-                        .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_personagens)
-                            .addComponent(btn_combate)
-                            .addComponent(btn_voltar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jp_mesaphLayout.setVerticalGroup(
-            jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_mesaphLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_personagens)
-                        .addComponent(lbl_charcounter1))
-                    .addComponent(lbl_imagem))
-                .addGap(11, 11, 11)
-                .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_npcs)
-                    .addComponent(lbl_npcounter))
-                .addGap(11, 11, 11)
-                .addGroup(jp_mesaphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_monstros)
-                    .addComponent(lbl_monstercounter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_combate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(btn_voltar)
-                .addContainerGap())
-        );
+        lbl_imagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jp_mesaph.add(lbl_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jp_mesaph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jp_mesaph, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jp_mesaph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jp_mesaph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

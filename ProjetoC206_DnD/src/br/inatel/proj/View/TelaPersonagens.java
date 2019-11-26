@@ -63,166 +63,109 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btn_Addchar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_chars = new javax.swing.JList<>();
-        lbl_imgPersonagens = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txta_interface = new javax.swing.JTextArea();
-        btn_Addchar = new javax.swing.JButton();
         btn_showChar = new javax.swing.JButton();
         btn_showCombat = new javax.swing.JButton();
         btn_showAtributes = new javax.swing.JButton();
         btn_voltar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
         btn_excluir = new javax.swing.JButton();
+        lbl_personagens = new javax.swing.JLabel();
+        lbl_imgPersonagens = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personagens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jList_chars.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jList_chars.setModel(dlm
-        );
-        jScrollPane1.setViewportView(jList_chars);
-
-        lbl_imgPersonagens.setText("img placeholder");
-
-        txta_interface.setColumns(20);
-        txta_interface.setRows(5);
-        jScrollPane2.setViewportView(txta_interface);
-
-        btn_Addchar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_Addchar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_Addchar.setText("Adicionar Personagem");
         btn_Addchar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AddcharActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_Addchar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
-        btn_showChar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_chars.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_chars.setModel(dlm
+        );
+        jScrollPane1.setViewportView(jList_chars);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 190, 110));
+
+        txta_interface.setColumns(20);
+        txta_interface.setRows(5);
+        jScrollPane2.setViewportView(txta_interface);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 224, 280));
+
+        btn_showChar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_showChar.setText("Info Ceral");
         btn_showChar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_showCharActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_showChar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 140, 30));
 
-        btn_showCombat.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_showCombat.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_showCombat.setText("Info Combate");
         btn_showCombat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_showCombatActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_showCombat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 140, 30));
 
-        btn_showAtributes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_showAtributes.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_showAtributes.setText("Info Atributos");
         btn_showAtributes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_showAtributesActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_showAtributes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 30));
 
-        btn_voltar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_voltar.setText("Voltar");
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_voltarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, -1, -1));
 
-        btn_editar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_editar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_editar.setText("Editar");
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
-        btn_excluir.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_excluir.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_excluir.setText("Excluir");
         btn_excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_excluirActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_excluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_showAtributes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_showCombat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_showChar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_voltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Addchar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_imgPersonagens)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_excluir)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_showChar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_showCombat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_showAtributes)
-                                .addGap(73, 73, 73))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btn_editar)
-                                    .addComponent(btn_excluir))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(lbl_imgPersonagens)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_voltar)
-                            .addComponent(btn_Addchar))))
-                .addContainerGap())
-        );
+        lbl_personagens.setFont(new java.awt.Font("Sylfaen", 0, 24)); // NOI18N
+        lbl_personagens.setText("Personagens");
+        jPanel1.add(lbl_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 228, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lbl_imgPersonagens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jPanel1.add(lbl_imgPersonagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -303,6 +246,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_imgPersonagens;
+    private javax.swing.JLabel lbl_personagens;
     private javax.swing.JTextArea txta_interface;
     // End of variables declaration//GEN-END:variables
 
