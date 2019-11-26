@@ -35,6 +35,20 @@ public class Chara extends Actor implements Serializable, Comparable<Chara> {
     private Grimorio spellbook = new Grimorio();
     private String notas;
 
+    public Chara() {
+        this.classe = "";
+        this.initiative = "";
+        this.speed = "";
+        this.level = "";
+        this.ac = "";
+        this.proficiency = "";
+        this.goldP = "";
+        this.copperP = "";
+        this.silverP = "";
+        this.notas = "";
+    }
+    
+
     public String showChar() {
         String aux = "Char: " + nome + "\n"
                 + "Race: " + race + "\n"

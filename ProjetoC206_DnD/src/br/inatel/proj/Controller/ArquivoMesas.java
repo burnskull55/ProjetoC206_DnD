@@ -6,6 +6,7 @@
 package br.inatel.proj.Controller;
 
 import br.inatel.proj.Model.Actor;
+import br.inatel.proj.Model.Chara;
 import br.inatel.proj.Model.Mesa;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +30,8 @@ public class ArquivoMesas implements Serializable {
 
     public static String autor;
     public static String mesaName;
+    public static Chara character = new Chara();
+    public static boolean isEdit;
 
     public void setAutor(String autor) {
         this.autor = autor;

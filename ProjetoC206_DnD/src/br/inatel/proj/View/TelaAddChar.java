@@ -26,7 +26,9 @@ public class TelaAddChar extends javax.swing.JFrame {
     private ArrayList<Chara> chars = new ArrayList();
 
     private Chara player = new Chara();//variavel aux para manipular os valores lidos
-    private int index;
+
+    private int index1;
+    private int index2;
     private String userName;
     private String mesaName;
 
@@ -37,14 +39,21 @@ public class TelaAddChar extends javax.swing.JFrame {
     public TelaAddChar() {
         initComponents();
         this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_salvar);
 
         this.userName = ArquivoMesas.autor;
         this.mesaName = ArquivoMesas.mesaName;
 
         this.mesas = arquivo.ler();
         findTable(ArquivoMesas.mesaName);
-        this.index = this.mesas.indexOf(this.mesa);
+        this.index1 = this.mesas.indexOf(this.mesa);
         this.chars = this.mesa.getCharacters();
+        if (ArquivoMesas.isEdit) {
+            this.player = ArquivoMesas.character;
+            initForEdit();
+            findIndex();
+
+        }
 
     }
 
@@ -762,9 +771,14 @@ public class TelaAddChar extends javax.swing.JFrame {
     }
 
     private void salvaPlayer() {
-        this.chars.add(player);
+        if (ArquivoMesas.isEdit) {
+            this.chars.set(index2, player);
+            ArquivoMesas.isEdit = false;
+        } else {
+            this.chars.add(player);
+        }
         this.mesa.setCharacters(chars);
-        this.mesas.set(this.index,this.mesa);
+        this.mesas.set(this.index1, this.mesa);
         arquivo.salvarArquivo(mesas);
         cancel();
     }
@@ -816,4 +830,13 @@ public class TelaAddChar extends javax.swing.JFrame {
             System.out.println("wtf");
         }
     }
+
+    private void findIndex() {
+        for (Chara aChar : this.chars) {
+            if (aChar.getNome().equals(this.player.getNome())) {
+                this.index2 = this.chars.indexOf(aChar);
+            }
+        }
+    }
+
 }

@@ -38,14 +38,15 @@ public class TelaPersonagens extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_showChar);
-        
+
         this.userName = ArquivoMesas.autor;
         this.mesaName = ArquivoMesas.mesaName;
-        
+
         this.mesas = arquivo.ler();
         findTable(ArquivoMesas.mesaName);
         this.index = this.mesas.indexOf(this.mesa);
         this.chars = this.mesa.getCharacters();
+        ArquivoMesas.character = this.achar;
 
         //preenchendo a lista
         listar();
@@ -312,17 +313,6 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
     }
 
-    private void salvarDados(Mesa mesa) {
-        mesas.add(mesa);
-        System.out.println(arquivo.getAutor());
-        for (Mesa mesa1 : mesas) {
-            System.out.println(mesa1.getNome());
-        }
-
-        arquivo.salvarArquivo(mesas);
-
-    }
-
     private void findTable(String aux) {
         boolean find = false;
         for (Mesa mesa1 : mesas) {
@@ -344,35 +334,45 @@ public class TelaPersonagens extends javax.swing.JFrame {
         }
     }
 
-    private void findChar() {
+    private boolean findChar() {
         String aux = jList_chars.getSelectedValue();
         boolean find = false;
         for (Chara aChar : chars) {
             if (aChar.getNome().equals(aux)) {
                 this.achar = aChar;
                 find = true;
+                return find;
 
             }
         }
         if (!find) {
-            System.out.println("wtf");
-            this.achar.setNome("nop");
+            System.out.println("findchar chamado , nao encontrado char");
         }
+        return find;
     }
 
     private void showGeral() {
-        findChar();
-        txta_interface.setText(this.achar.showChar());
+        if (findChar()) {
+            txta_interface.setText(this.achar.showChar());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "char nao encontrado");
+        }
     }
 
     private void showAtributos() {
-        findChar();
-        txta_interface.setText(this.achar.showAtributos());
+        if (findChar()) {
+            txta_interface.setText(this.achar.showAtributos());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "char nao encontrado");
+        }
     }
 
     private void showCombate() {
-        findChar();
-        txta_interface.setText(this.achar.showCombat());
+        if (findChar()) {
+            txta_interface.setText(this.achar.showCombat());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "char nao encontrado");
+        }
     }
 
     private void voltar() {
@@ -381,14 +381,20 @@ public class TelaPersonagens extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private void editar() {//TODO
-        findChar();
-        if (!this.achar.getNome().equals("nop")) {
-            TelaAddChar tela = new TelaAddChar();
-            tela.setVisible(true);
-            this.dispose();
+    private void editar() {
+        String aux = jList_chars.getSelectedValue();
+        if (findChar()) {
+            if (aux != null) {
+                ArquivoMesas.character = this.achar;
+                ArquivoMesas.isEdit = true;
+                TelaAddChar tela = new TelaAddChar();
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "nao ha personagens ainda");
+            }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "nao ha personagens ainda");
+            JOptionPane.showMessageDialog(rootPane, "char nao encontrado");
         }
     }
 
@@ -396,7 +402,6 @@ public class TelaPersonagens extends javax.swing.JFrame {
         //findChar();
         String aux = jList_chars.getSelectedValue();
 
-        
         if (aux != null) {
             for (Chara char1 : this.chars) {
                 if (char1.getNome().equals(aux)) {
