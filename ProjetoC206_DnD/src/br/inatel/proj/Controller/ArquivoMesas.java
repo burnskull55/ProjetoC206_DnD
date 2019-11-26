@@ -23,29 +23,40 @@ import java.util.logging.Logger;
  *
  * @author burns
  * @since 11/11/19
- * @version 1.0
- * classe que controla o arquivo para salvar os objetos mesa
+ * @version 1.0 classe que controla o arquivo para salvar os objetos mesa
  */
-public class ArquivoMesas implements Serializable{
-    private final String autor;
+public class ArquivoMesas implements Serializable {
+
+    public static String autor;
+    public static String mesaName;
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 
     public String getAutor() {
         return autor;
     }
-    
-    
-    public ArquivoMesas(String autor) {
-        this.autor = autor;
+
+    public static String getMesaName() {
+        return mesaName;
+    }
+
+    public static void setMesaName(String mesaName) {
+        ArquivoMesas.mesaName = mesaName;
+    }
+
+    public ArquivoMesas() {
         try {
-            OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", true);
+            OutputStream os = new FileOutputStream(this.autor + "Mesas.txt", true);
         } catch (FileNotFoundException e) {
         }
     }
-    
-    public void salvarArquivo(ArrayList<Mesa> mesa){
+
+    public void salvarArquivo(ArrayList<Mesa> mesa) {
         try {
             //salvando em um arquivo
-            OutputStream os = new FileOutputStream(this.autor+"Mesas.txt", false);
+            OutputStream os = new FileOutputStream(this.autor + "Mesas.txt", false);
             ObjectOutputStream osw = new ObjectOutputStream(os);
             osw.writeObject(mesa);
 
@@ -60,8 +71,7 @@ public class ArquivoMesas implements Serializable{
         }
 
     }
-    
-    
+
     public ArrayList<Mesa> ler() {
 
         FileInputStream fin;
@@ -69,7 +79,7 @@ public class ArquivoMesas implements Serializable{
         ArrayList<Mesa> mesas = new ArrayList<>();
 
         try {
-            fin = new FileInputStream(this.autor+"Mesas.txt");
+            fin = new FileInputStream(this.autor + "Mesas.txt");
             in = new ObjectInputStream(fin);
 
             mesas = (ArrayList<Mesa>) in.readObject();
@@ -79,7 +89,8 @@ public class ArquivoMesas implements Serializable{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
         return mesas;
     }
+
 }

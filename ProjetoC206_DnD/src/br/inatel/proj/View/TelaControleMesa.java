@@ -7,6 +7,7 @@ package br.inatel.proj.View;
 
 import br.inatel.proj.Controller.ArquivoMesas;
 import br.inatel.proj.Model.Mesa;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.util.ArrayList;
 import sun.security.jgss.spi.MechanismFactory;
 
@@ -16,30 +17,24 @@ import sun.security.jgss.spi.MechanismFactory;
  */
 public class TelaControleMesa extends javax.swing.JFrame {
 
-    private ArquivoMesas arquivo;
-
+    private ArquivoMesas arquivo = new ArquivoMesas();
     private Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
     private ArrayList<Mesa> mesas = new ArrayList();
-    private static String userName;
-    private static String mesaName;
     
+    private String userName;
+    private String mesaName;
 
     /**
      * Creates new form TelaControleMesa
      */
-    public TelaControleMesa(String userName,String mesaName) {
+    public TelaControleMesa() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.userName = ArquivoMesas.autor;
+        this.mesaName = ArquivoMesas.mesaName;
         
-        TelaControleMesa.userName = userName;
-        TelaControleMesa.mesaName = mesaName;
-        
-
-        arquivo = new ArquivoMesas(TelaControleMesa.userName);
         mesas = arquivo.ler();
-        findTable(mesaName);
-       
-        
+        findTable(ArquivoMesas.mesaName);
 
         lbl_charcounter1.setText(this.mesa.getCharacters().size() + "");
         lbl_monstercounter.setText(this.mesa.getMonstros().size() + "");
@@ -239,7 +234,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaControleMesa(userName,mesaName).setVisible(true);
+                new TelaControleMesa().setVisible(true);
             }
         });
     }
@@ -258,7 +253,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void callChar() {
-        TelaPersonagens telaChar = new TelaPersonagens(userName , mesaName);
+        TelaPersonagens telaChar = new TelaPersonagens();
         telaChar.setVisible(true);
         this.dispose();
     }
@@ -301,6 +296,8 @@ public class TelaControleMesa extends javax.swing.JFrame {
     }
 
     private void voltat() {
-        //unsuported
+        TelaMesas tela = new TelaMesas();
+        tela.setVisible(true);
+        this.dispose();
     }
 }

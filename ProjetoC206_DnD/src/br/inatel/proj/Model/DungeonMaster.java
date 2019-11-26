@@ -18,7 +18,17 @@ public class DungeonMaster implements Serializable{
     
     private String userName;
     private String password;
-    //private ArrayList<Mesa> mesas = new ArrayList();
+    private ArrayList<Mesa> mesas = new ArrayList();
+
+    public ArrayList<Mesa> getMesas() {
+        return mesas;
+    }
+
+    public void setMesas(ArrayList<Mesa> mesas) {
+        this.mesas = mesas;
+    }
+    
+    
 
     public String getUserName() {
         return userName;

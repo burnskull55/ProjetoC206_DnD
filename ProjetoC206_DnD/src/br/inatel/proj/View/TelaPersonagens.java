@@ -19,33 +19,32 @@ import javax.xml.bind.annotation.XmlElement;
  */
 public class TelaPersonagens extends javax.swing.JFrame {
 
-    private ArquivoMesas arquivo;
-
+    private ArquivoMesas arquivo = new ArquivoMesas();
     private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
-
+    private Chara achar = new Chara();
     private ArrayList<Chara> chars = new ArrayList();
 
     private DefaultListModel dlm = new DefaultListModel();
-    private Chara achar = new Chara();
 
-    private static String userName;
-    private static String mesaName;
+    private String userName;
+    private String mesaName;
     private int index;
 
     /**
      * Creates new form TelaPersonagens
      */
-    public TelaPersonagens(String userName, String mesaName) {
+    public TelaPersonagens() {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        TelaPersonagens.userName = userName;
-        TelaPersonagens.mesaName = mesaName;
-
-        this.arquivo = new ArquivoMesas(TelaPersonagens.userName);
+        getRootPane().setDefaultButton(btn_showChar);
+        
+        this.userName = ArquivoMesas.autor;
+        this.mesaName = ArquivoMesas.mesaName;
+        
         this.mesas = arquivo.ler();
-        findTable(mesaName);
+        findTable(ArquivoMesas.mesaName);
+        this.index = this.mesas.indexOf(this.mesa);
         this.chars = this.mesa.getCharacters();
 
         //preenchendo a lista
@@ -285,7 +284,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPersonagens(userName, mesaName).setVisible(true);
+                new TelaPersonagens().setVisible(true);
             }
         });
     }
@@ -307,7 +306,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void callAddChar() {
-        TelaAddChar telaAddC = new TelaAddChar(userName, mesaName);
+        TelaAddChar telaAddC = new TelaAddChar();
         telaAddC.setVisible(true);
         this.dispose();
 
@@ -339,6 +338,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     }
 
     private void listar() { //lesta os personagens na jlist usando o dlm
+        dlm.clear();
         for (Chara aChar : chars) {
             dlm.addElement(aChar.getNome());
         }
@@ -376,7 +376,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     }
 
     private void voltar() {
-        TelaControleMesa tela = new TelaControleMesa(TelaPersonagens.userName, TelaPersonagens.mesaName);
+        TelaControleMesa tela = new TelaControleMesa();
         tela.setVisible(true);
         this.dispose();
     }
@@ -384,7 +384,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private void editar() {//TODO
         findChar();
         if (!this.achar.getNome().equals("nop")) {
-            TelaAddChar tela = new TelaAddChar(TelaPersonagens.userName , TelaPersonagens.mesaName);
+            TelaAddChar tela = new TelaAddChar();
             tela.setVisible(true);
             this.dispose();
         } else {
@@ -396,21 +396,22 @@ public class TelaPersonagens extends javax.swing.JFrame {
         //findChar();
         String aux = jList_chars.getSelectedValue();
 
-        chars = this.mesa.getCharacters();
+        
         if (aux != null) {
-            for (Chara char1 : chars) {
+            for (Chara char1 : this.chars) {
                 if (char1.getNome().equals(aux)) {
-                    index = chars.indexOf(char1);
+                    int indexAux = this.chars.indexOf(char1);
                     String msg = "Deseja remover o personagem: " + char1.getNome() + "?";
 
                     int op = JOptionPane.showConfirmDialog(jScrollPane1, msg, "Excluir", JOptionPane.WARNING_MESSAGE);
                     if (op == 0) {
                         // OK: excluir o char
                         JOptionPane.showMessageDialog(jScrollPane1, "personagem Removido com Sucesso!");
-                        mesa.getCharacters().remove(index);
-
+                        this.chars.remove(indexAux);
+                        this.mesa.setCharacters(chars);
+                        this.mesas.set(this.index, this.mesa);
                         arquivo.salvarArquivo(mesas);
-                        this.listar();
+                        listar();
                         index = 0;
                         break;
                     }

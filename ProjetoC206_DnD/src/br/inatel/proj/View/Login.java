@@ -230,7 +230,8 @@ public class Login extends javax.swing.JFrame {
 
         if (checkInputs(dm)) {//encontrado um objeto user com senha e usuario confirmados
 
-            TelaMesas telaPrincipal = new TelaMesas(dm);    // Cria o menu
+            ArquivoMesas.autor = dm.getUserName();
+            TelaMesas telaPrincipal = new TelaMesas();    // Cria o menu
             telaPrincipal.setVisible(true);     // Chama a tela de menu
             this.dispose();
             flag = false;

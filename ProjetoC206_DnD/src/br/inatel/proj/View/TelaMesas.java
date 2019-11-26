@@ -31,34 +31,26 @@ import javax.swing.ListModel;
  * @author burns
  */
 public class TelaMesas extends javax.swing.JFrame {
-
-    private ArquivoMesas arquivo;
+    
+    private ArquivoMesas arquivo = new ArquivoMesas();
     private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
-    private static DungeonMaster dmstatic = new DungeonMaster();//dungeon master dono dessa mesa
     private String userName;
-    private String mesaName;
-
-    private boolean tag = false;
-
+    
     private DefaultListModel dlm = new DefaultListModel();
 
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaMesas(DungeonMaster dm) { //construtor
-
+    public TelaMesas() { //construtor
         initComponents();
         this.setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_login);
-
-        TelaMesas.dmstatic = dm;
-        userName = dmstatic.getUserName();
-        arquivo = new ArquivoMesas(userName);
-
-        mesas = arquivo.ler();
+        this.userName = ArquivoMesas.autor;
+        
+        this.mesas = arquivo.ler();
         listar();
-
+        
     }
 
     /**
@@ -204,7 +196,7 @@ public class TelaMesas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaMesas(dmstatic).setVisible(true);
+                new TelaMesas().setVisible(true);
             }
         });
     }
@@ -221,52 +213,46 @@ public class TelaMesas extends javax.swing.JFrame {
 
     private void criaMesa() {
         Mesa mesaAux = new Mesa();//cria uma mesa aux para ser inserida no arquivo
-        String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mes \n (você podera adicionar os personagens e npc's depois)");
+        
+        String aux = JOptionPane.showInputDialog(rootPane, "entre com o nome da sua nova mesa \n (você podera adicionar os personagens e npc's depois)");
+        
         mesaAux.setNome(aux);
         mesaAux.setUserName(userName);
-
-     /*   if (isUnique(mesaAux.getNome())) {*/
+        
+        if (isUnique(aux) && !aux.equals(null)) {
             // se nao existir cai aqui
             // salva os dados
             salvarDados(mesaAux);
-       /* } else {
+        } else {
             // Caso esteja errado emite um Erro
             String msg = "Mesa já cadastrada!";
             String title = "Mesa já existe!";
             int msgType = JOptionPane.ERROR_MESSAGE;
             JOptionPane.showMessageDialog(rootPane, msg, title, msgType);
-
-        }*/
+            
+        }
         listar();
-
+        
     }
-
+    
     private void selecionaMesa() {
         String mesa = list_mesas.getSelectedValue();//tring q recebe o valor selecionado da lista 
         findTable(mesa);
+        ArquivoMesas.mesaName = mesa;
+        
         /*apartir daqui o onjeto this.mesa ja tem a mesa selecionada pelo usuario 
         TODO chamar uma tela de controle mesa 
         fazer o mesmo processo de um item statico para elas , passando como parametro o onjeto this.mesa modificado nessa funçao
          */
-        TelaControleMesa telaControle = new TelaControleMesa(userName, mesaName);
+        TelaControleMesa telaControle = new TelaControleMesa();
         telaControle.setVisible(true);
         this.dispose();
     }
-
-    private boolean isUnique(String nomeDaMesa) {
-        mesas = arquivo.ler();
-        for (Mesa mesa1 : mesas) {
-            if (mesa1.getNome().equals(nomeDaMesa)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    
     private void salvarDados(Mesa mesa) {
         mesas.add(mesa);
         arquivo.salvarArquivo(mesas);
-
+        
     }
 
     /**
@@ -277,24 +263,33 @@ public class TelaMesas extends javax.swing.JFrame {
      */
     private void findTable(String aux) {
         boolean find = false;
-        for (Mesa mesa1 : mesas) {
+        for (Mesa mesa1 : this.mesas) {
             if (mesa1.getNome().equals(aux)) {
                 this.mesa = mesa1;
                 find = true;
-
             }
         }
         if (!find) {
             System.out.println("em findtable nao encontramos a mesa no array mesas");
         }
     }
-
+    
     private void listar() {
         dlm.clear();
-        mesas = arquivo.ler();
-        for (Mesa mesa1 : mesas) {
+        for (Mesa mesa1 : this.mesas) {
             dlm.addElement(mesa1.getNome());
         }
     }
-
+    
+    private boolean isUnique(String nome) {
+        boolean tag = true;
+        for (Mesa mesa1 : this.mesas) {
+            if (mesa1.getNome().equals(nome)) {
+                tag = false;
+                return tag;
+            }
+        }
+        return tag;
+    }
+    
 }
