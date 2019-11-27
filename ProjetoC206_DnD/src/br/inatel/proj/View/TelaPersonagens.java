@@ -44,7 +44,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         this.mesas = arquivo.ler();
         findTable(ArquivoMesas.mesaName);
-        
+
         this.index = this.mesas.indexOf(this.mesa);
         this.chars = this.mesa.getCharacters();
         ArquivoMesas.character = this.achar;
@@ -173,8 +173,8 @@ public class TelaPersonagens extends javax.swing.JFrame {
         lbl_personagens.setText("Personagens");
         jPanel1.add(lbl_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 228, -1));
 
-        lbl_imgPersonagens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
-        jPanel1.add(lbl_imgPersonagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
+        lbl_imgPersonagens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jPanel1.add(lbl_imgPersonagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 360));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

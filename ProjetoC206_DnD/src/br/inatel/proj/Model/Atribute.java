@@ -11,14 +11,13 @@ import java.io.Serializable;
  *
  * @author burns
  */
-public class Atribute implements Serializable{
+public class Atribute implements Serializable {
+
     private String score;
-    private String  modifier;
+    private String modifier;
     private String save;
     private boolean isPro;
-    
-    
-    
+
     /*
     public Atribute(int pro) {
         if(this.score >= 8 && this.score <= 9){
@@ -73,8 +72,7 @@ public class Atribute implements Serializable{
     }
     
 
-    */
-
+     */
     public String getScore() {
         return score;
     }
@@ -106,11 +104,5 @@ public class Atribute implements Serializable{
     public void setIsPro(boolean isPro) {
         this.isPro = isPro;
     }
-    
-    
-    
-    
-    
-   
-    
+
 }

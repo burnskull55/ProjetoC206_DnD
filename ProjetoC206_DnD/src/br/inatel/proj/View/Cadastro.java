@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  * @author burns
  */
 public class Cadastro extends javax.swing.JFrame {
-    
+
     private final ArquivoLogin arquivo = new ArquivoLogin();
     private ArrayList<DungeonMaster> dms = new ArrayList();
 
@@ -60,19 +60,19 @@ public class Cadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbl_headlinetxt.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lbl_headlinetxt.setFont(new java.awt.Font("Sylfaen", 0, 24)); // NOI18N
         lbl_headlinetxt.setText("Novo Dungeon Master ");
 
-        lbl_username.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbl_username.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         lbl_username.setText("Nome De Usuario");
 
-        lbl_senha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbl_senha.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         lbl_senha.setText("Senha");
 
-        lbl_confsenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbl_confsenha.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         lbl_confsenha.setText("Confirmar senha");
 
-        btn_cancelar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_cancelar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_cancelar.setText("Cancelar");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +80,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        btn_cadastro.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_cadastro.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_cadastro.setText("Confirmar");
         btn_cadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,15 +105,15 @@ public class Cadastro extends javax.swing.JFrame {
                                 .addComponent(txt_senha, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_cadastro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(lbl_headlinetxt)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +132,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(lbl_confsenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_senhaconfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
                     .addComponent(btn_cadastro))
@@ -221,13 +221,13 @@ public class Cadastro extends javax.swing.JFrame {
         String aux1 = txt_username.getText();
         String aux2 = txt_senha.getText();
         String aux3 = txt_senhaconfirm.getText();
-        
+
         if (aux2.equals(aux3)) {   // Confirmação de senha
             dms = arquivo.ler();
-            
+
             dm.setUserName(aux1);
             dm.setPassword(aux2);
-            
+
             if (isUnique(dm)) {
                 // se nao existir cai aqui
                 // salva os dados
@@ -243,9 +243,9 @@ public class Cadastro extends javax.swing.JFrame {
 
                 // Limpa os campos de texto
                 limparCampos();
-                
+
             }
-            
+
         } else {
             // Caso esteja errado emite um Erro
             String msg = "As senhas nao coincidem!";
@@ -257,27 +257,27 @@ public class Cadastro extends javax.swing.JFrame {
             limparCampos();
         }
     }
-    
+
     private boolean isUnique(DungeonMaster dm) {
         for (DungeonMaster dm1 : dms) {
-            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())){
+            if (dm1.getUserName().equals(dm.getUserName()) && dm1.getPassword().equals(dm.getPassword())) {
                 return false; //retorna falso caso encontre outro dm com os mesmos atributos
             }
         }
         return true;//caso nao encontre nenhum dm igual
     }
-    
+
     private void salvarDados(DungeonMaster dm) {
         dms.add(dm);
         arquivo.salvarArquivo(dms);
     }
-    
+
     private void limparCampos() {
         txt_username.setText("");
         txt_senha.setText("");
         txt_senhaconfirm.setText("");
     }
-    
+
     private void cancel() {
         Login login = new Login();
         login.setVisible(true);

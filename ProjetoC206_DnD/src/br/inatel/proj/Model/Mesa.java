@@ -12,17 +12,17 @@ import java.util.ArrayList;
  *
  * @author burns
  */
-public class Mesa implements Serializable, Comparable<Mesa>{
-    
+public class Mesa implements Serializable, Comparable<Mesa> {
+
     //public TelaControleMesa tela = new TelaControleMesa();
     private String userName;
     private String nome;
     private ArrayList<Chara> characters = new ArrayList();
     private ArrayList<Monstro> monstros = new ArrayList();
     private ArrayList<Npc> npcs = new ArrayList();
-    
+
     public Mesa() {
-        
+
     }
 
     public String getUserName() {
@@ -33,7 +33,6 @@ public class Mesa implements Serializable, Comparable<Mesa>{
         this.userName = userName;
     }
 
-    
     public ArrayList<Chara> getCharacters() {
         return characters;
     }
@@ -58,8 +57,6 @@ public class Mesa implements Serializable, Comparable<Mesa>{
         this.npcs = npcs;
     }
 
-    
-    
     public String getNome() {
         return nome;
     }
@@ -68,11 +65,9 @@ public class Mesa implements Serializable, Comparable<Mesa>{
         this.nome = nome;
     }
 
-
     @Override
     public int compareTo(Mesa o) {
-       return  this.getNome().compareTo(o.getNome());
+        return this.getNome().compareTo(o.getNome());
     }
-    
-    
+
 }

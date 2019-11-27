@@ -1,4 +1,0 @@
--passar todos os metodos que recebem a mesa para um construtor que recebe uma string com o nome da mesa 
--descobrir como o programa esta criando 2 mesas diferentes com o mesmo nome
-- adicionar um botao de voltar paratela de controle mesa
--concertar o metodo listar em tela personagens

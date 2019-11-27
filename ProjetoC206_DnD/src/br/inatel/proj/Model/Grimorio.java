@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author burns
  */
-public class Grimorio implements Serializable{
+public class Grimorio implements Serializable {
+
     private String spellAtk;
     private String spellDc;
     private String Spells;
@@ -40,7 +41,4 @@ public class Grimorio implements Serializable{
         this.Spells = Spells;
     }
 
-   
-    
-    
 }

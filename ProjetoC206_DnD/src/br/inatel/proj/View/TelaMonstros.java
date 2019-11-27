@@ -147,7 +147,7 @@ public class TelaMonstros extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 224, 280));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,9 +348,10 @@ public class TelaMonstros extends javax.swing.JFrame {
     }
 
     private void showNotas() {
-if (findMonster()) {
+        if (findMonster()) {
             txta_interface.setText(this.monstro.getNotas());
         } else {
             JOptionPane.showMessageDialog(rootPane, "monstro nao encontrado");
-        }    }
+        }
+    }
 }

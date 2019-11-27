@@ -72,8 +72,8 @@ public class TelaAddMonstro extends javax.swing.JFrame {
         lbl_armor = new javax.swing.JLabel();
         txt_armor = new javax.swing.JTextField();
         txt_movement = new javax.swing.JTextField();
-        lbl_hp1 = new javax.swing.JLabel();
-        lbl_hp2 = new javax.swing.JLabel();
+        lbl_speed = new javax.swing.JLabel();
+        lbl_iniciativa = new javax.swing.JLabel();
         txt_iniciativa = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -111,11 +111,11 @@ public class TelaAddMonstro extends javax.swing.JFrame {
         lbl_armor.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
         lbl_armor.setText("C/ Armadura:");
 
-        lbl_hp1.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
-        lbl_hp1.setText("Movimento:");
+        lbl_speed.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
+        lbl_speed.setText("Movimento:");
 
-        lbl_hp2.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
-        lbl_hp2.setText("Iniciativa:");
+        lbl_iniciativa.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
+        lbl_iniciativa.setText("Iniciativa:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -137,14 +137,14 @@ public class TelaAddMonstro extends javax.swing.JFrame {
                             .addComponent(txt_lvl)
                             .addComponent(txt_race)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbl_hp2)
+                        .addComponent(lbl_iniciativa)
                         .addGap(11, 11, 11)
                         .addComponent(txt_iniciativa))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_hp)
                             .addComponent(lbl_armor)
-                            .addComponent(lbl_hp1))
+                            .addComponent(lbl_speed))
                         .addGap(11, 11, 11)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_movement)
@@ -176,11 +176,11 @@ public class TelaAddMonstro extends javax.swing.JFrame {
                     .addComponent(txt_armor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_hp1)
+                    .addComponent(lbl_speed)
                     .addComponent(txt_movement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_hp2)
+                    .addComponent(lbl_iniciativa)
                     .addComponent(txt_iniciativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -303,7 +303,7 @@ public class TelaAddMonstro extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, 160));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/InlineR_Ampersand.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/InlineR_Ampersand.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -375,12 +375,12 @@ public class TelaAddMonstro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbl_armor;
     private javax.swing.JLabel lbl_hp;
-    private javax.swing.JLabel lbl_hp1;
-    private javax.swing.JLabel lbl_hp2;
+    private javax.swing.JLabel lbl_iniciativa;
     private javax.swing.JLabel lbl_level;
     private javax.swing.JLabel lbl_magia;
     private javax.swing.JLabel lbl_nome;
     private javax.swing.JLabel lbl_race;
+    private javax.swing.JLabel lbl_speed;
     private javax.swing.JLabel lbl_spellDc;
     private javax.swing.JLabel lbl_spellatk;
     private javax.swing.JTextField txt_armor;
@@ -424,18 +424,18 @@ public class TelaAddMonstro extends javax.swing.JFrame {
     private void initForEdit() {
         txt_nome.setText(monstro.getNome());
         txt_race.setText(monstro.getRace());
-        txt_lvl.setText(monstro.getLevel()+"");
+        txt_lvl.setText(monstro.getLevel() + "");
         txt_hp.setText(monstro.getHp());
-        txt_armor.setText(monstro.getAc()+"");
-        txt_movement.setText(monstro.getSpeed()+"");
-        txt_iniciativa.setText(monstro.getInitiative()+"");
-        
+        txt_armor.setText(monstro.getAc() + "");
+        txt_movement.setText(monstro.getSpeed() + "");
+        txt_iniciativa.setText(monstro.getInitiative());
+
         txt_spellatk.setText(monstro.getSpellatk());
         txt_spelldc.setText(monstro.getSpellDc());
         txta_magias.setText(monstro.getSpells());
-        
+
         txta_notas.setText(monstro.getNotas());
-                
+
     }
 
     private void findIndex() {
@@ -450,11 +450,11 @@ public class TelaAddMonstro extends javax.swing.JFrame {
         if (!txt_nome.getText().equals("")) {
             monstro.setNome(txt_nome.getText());
             monstro.setRace(txt_race.getText());
-            monstro.setLevel(Integer.parseInt(txt_lvl.getText()));
+            monstro.setLevel(txt_lvl.getText());
             monstro.setHp(txt_hp.getText());
-            monstro.setAc(Integer.parseInt(txt_armor.getText()));
-            monstro.setSpeed(Integer.parseInt(txt_movement.getText()));
-            monstro.setInitiative(Integer.parseInt(txt_iniciativa.getText()));
+            monstro.setAc(txt_armor.getText());
+            monstro.setSpeed(txt_movement.getText());
+            monstro.setInitiative(txt_iniciativa.getText());
 
             monstro.setSpellDc(txt_spelldc.getText());
             monstro.setSpellatk(txt_spellatk.getText());

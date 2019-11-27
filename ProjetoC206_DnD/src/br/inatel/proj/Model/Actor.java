@@ -7,19 +7,19 @@ package br.inatel.proj.Model;
 
 import java.io.Serializable;
 
-
-
-
 /**
  *
  * @author burns
  */
-public abstract class Actor implements Serializable{
+public abstract class Actor implements Serializable,Comparable<Actor>{
+
     protected String nome;
     protected String race;
+    protected String nivel;
     protected String backGround;
     protected String alignment;
     protected String hp;
+    protected String initiative;
+
     
-            
 }

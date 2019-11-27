@@ -35,7 +35,7 @@ public class ArquivoMesas implements Serializable {
     public static Chara character = new Chara();
     public static Monstro monstro = new Monstro();
     public static Npc npc = new Npc();
-    
+
     public static boolean isEdit;
 
     public void setAutor(String autor) {

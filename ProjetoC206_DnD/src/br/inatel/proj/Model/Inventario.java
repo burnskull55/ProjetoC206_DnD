@@ -14,12 +14,12 @@ import java.io.Serializable;
  *
  * @author burns
  */
-public class Inventario implements Serializable{
+public class Inventario implements Serializable {
+
     private Pack pack = new Pack();
     private Consumables consumables = new Consumables();
     private Arma arma = new Arma();
     private String inv;
-    
 
     @Override
     public String toString() {
@@ -34,8 +34,7 @@ public class Inventario implements Serializable{
     public void setInv(String inv) {
         this.inv = inv;
     }
-    
-    
+
     public Pack getPack() {
         return pack;
     }
@@ -60,7 +59,4 @@ public class Inventario implements Serializable{
         this.arma = arma;
     }
 
-    
-    
-    
 }

@@ -23,15 +23,15 @@ import java.util.logging.Logger;
  * @author burns
  */
 public class ArquivoLogin {
-    
+
     public ArquivoLogin() {
         try {
             OutputStream os = new FileOutputStream("login.txt", true);
         } catch (FileNotFoundException e) {
         }
     }
-    
-    public void salvarArquivo(ArrayList<DungeonMaster> dm){
+
+    public void salvarArquivo(ArrayList<DungeonMaster> dm) {
         try {
             //salvando em um arquivo
             OutputStream os = new FileOutputStream("login.txt", false);
@@ -49,8 +49,7 @@ public class ArquivoLogin {
         }
 
     }
-    
-    
+
     public ArrayList<DungeonMaster> ler() {
 
         FileInputStream fin;
@@ -68,7 +67,7 @@ public class ArquivoLogin {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
         return dms;
     }
 }

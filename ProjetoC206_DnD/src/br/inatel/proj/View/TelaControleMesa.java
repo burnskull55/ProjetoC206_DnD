@@ -20,7 +20,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private ArquivoMesas arquivo = new ArquivoMesas();
     private Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
     private ArrayList<Mesa> mesas = new ArrayList();
-    
+
     private String userName;
     private String mesaName;
 
@@ -32,7 +32,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.userName = ArquivoMesas.autor;
         this.mesaName = ArquivoMesas.mesaName;
-        
+
         mesas = arquivo.ler();
         findTable(ArquivoMesas.mesaName);
 
@@ -53,14 +53,14 @@ public class TelaControleMesa extends javax.swing.JFrame {
 
         jp_mesaph = new javax.swing.JPanel();
         lbl_mesan = new javax.swing.JLabel();
-        btn_personagens = new javax.swing.JButton();
-        btn_monstros = new javax.swing.JButton();
-        btn_npcs = new javax.swing.JButton();
-        btn_combate = new javax.swing.JButton();
         lbl_npcounter = new javax.swing.JLabel();
-        lbl_charcounter1 = new javax.swing.JLabel();
         lbl_monstercounter = new javax.swing.JLabel();
+        lbl_charcounter1 = new javax.swing.JLabel();
         btn_voltar = new javax.swing.JButton();
+        btn_npcs = new javax.swing.JButton();
+        btn_monstros = new javax.swing.JButton();
+        btn_personagens = new javax.swing.JButton();
+        btn_combate = new javax.swing.JButton();
         lbl_imagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,64 +68,28 @@ public class TelaControleMesa extends javax.swing.JFrame {
         jp_mesaph.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_mesan.setBackground(new java.awt.Color(0, 0, 0));
-        lbl_mesan.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_mesan.setFont(new java.awt.Font("Sylfaen", 0, 36)); // NOI18N
         lbl_mesan.setForeground(new java.awt.Color(255, 255, 255));
         lbl_mesan.setText("mesa name");
-        jp_mesaph.add(lbl_mesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, 50));
-
-        btn_personagens.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        btn_personagens.setText("Personagens");
-        btn_personagens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_personagensActionPerformed(evt);
-            }
-        });
-        jp_mesaph.add(btn_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        btn_monstros.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        btn_monstros.setText("Monstros");
-        btn_monstros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_monstrosActionPerformed(evt);
-            }
-        });
-        jp_mesaph.add(btn_monstros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-
-        btn_npcs.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        btn_npcs.setText("Npcs");
-        btn_npcs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_npcsActionPerformed(evt);
-            }
-        });
-        jp_mesaph.add(btn_npcs, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-
-        btn_combate.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        btn_combate.setText("Combate");
-        btn_combate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_combateActionPerformed(evt);
-            }
-        });
-        jp_mesaph.add(btn_combate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        jp_mesaph.add(lbl_mesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 210, 50));
 
         lbl_npcounter.setBackground(new java.awt.Color(0, 0, 0));
         lbl_npcounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         lbl_npcounter.setForeground(new java.awt.Color(255, 255, 255));
         lbl_npcounter.setText("npc counter");
-        jp_mesaph.add(lbl_npcounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 60, 30));
-
-        lbl_charcounter1.setBackground(new java.awt.Color(0, 0, 0));
-        lbl_charcounter1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        lbl_charcounter1.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_charcounter1.setText("player counter");
-        jp_mesaph.add(lbl_charcounter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 105, 70, 30));
+        jp_mesaph.add(lbl_npcounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 40, 30));
 
         lbl_monstercounter.setBackground(new java.awt.Color(0, 0, 0));
         lbl_monstercounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         lbl_monstercounter.setForeground(new java.awt.Color(255, 255, 255));
         lbl_monstercounter.setText("monster counter");
-        jp_mesaph.add(lbl_monstercounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 90, 30));
+        jp_mesaph.add(lbl_monstercounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 40, 30));
+
+        lbl_charcounter1.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_charcounter1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_charcounter1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_charcounter1.setText("player counter");
+        jp_mesaph.add(lbl_charcounter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 40, 30));
 
         btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_voltar.setText("Voltar");
@@ -134,9 +98,45 @@ public class TelaControleMesa extends javax.swing.JFrame {
                 btn_voltarActionPerformed(evt);
             }
         });
-        jp_mesaph.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
+        jp_mesaph.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, -1, -1));
 
-        lbl_imagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        btn_npcs.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_npcs.setText("Npcs");
+        btn_npcs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_npcsActionPerformed(evt);
+            }
+        });
+        jp_mesaph.add(btn_npcs, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 74, -1));
+
+        btn_monstros.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_monstros.setText("Monstros");
+        btn_monstros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_monstrosActionPerformed(evt);
+            }
+        });
+        jp_mesaph.add(btn_monstros, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
+
+        btn_personagens.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_personagens.setText("Personagens");
+        btn_personagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_personagensActionPerformed(evt);
+            }
+        });
+        jp_mesaph.add(btn_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+
+        btn_combate.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_combate.setText("Combate");
+        btn_combate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_combateActionPerformed(evt);
+            }
+        });
+        jp_mesaph.add(btn_combate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 107, -1));
+
+        lbl_imagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
         jp_mesaph.add(lbl_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,17 +229,21 @@ public class TelaControleMesa extends javax.swing.JFrame {
     }
 
     private void callNpc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaNpc tela = new TelaNpc();
+        tela.setVisible(true);
+        this.dispose();
     }
 
     private void callMonster() {
-       TelaMonstros tela = new TelaMonstros();
-       tela.setVisible(true);
-       this.dispose();
+        TelaMonstros tela = new TelaMonstros();
+        tela.setVisible(true);
+        this.dispose();
     }
 
     private void callCombat() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaCombate tela = new TelaCombate();
+        tela.setVisible(true);
+        this.dispose();
     }
 
     private void salvarDados(Mesa mesa) {

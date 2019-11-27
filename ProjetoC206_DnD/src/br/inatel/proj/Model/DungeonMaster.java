@@ -11,11 +11,11 @@ import java.util.ArrayList;
 /**
  *
  * @author burns
- * @since  11/11/19
+ * @since 11/11/19
  * @version 1.0
  */
-public class DungeonMaster implements Serializable{
-    
+public class DungeonMaster implements Serializable {
+
     private String userName;
     private String password;
     private ArrayList<Mesa> mesas = new ArrayList();
@@ -27,8 +27,6 @@ public class DungeonMaster implements Serializable{
     public void setMesas(ArrayList<Mesa> mesas) {
         this.mesas = mesas;
     }
-    
-    
 
     public String getUserName() {
         return userName;
@@ -45,5 +43,5 @@ public class DungeonMaster implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

@@ -12,25 +12,39 @@ package br.inatel.proj.Model;
 public class Monstro extends Actor {
 
     private String cLass;
-    private int initiative;
-    private int speed;
-    private int level;
-    private int ac;
-    private int proficiency;
+    private String speed;
+    private String level;
+    private String ac;
+    private String proficiency;
     private String spellDc;
     private String spellatk;
     private String spells;
     private String notas;
-    
-    
-    public String showMonstro(){
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+
+    public String getInitiative() {
+        return initiative;
+    }
+
+    public void setInitiative(String initiative) {
+        this.initiative = initiative;
+    }
+
+    public String showMonstro() {
         String aux = "Monstro: " + nome + "\n"
                 + "Raça: " + race + "\n"
                 + "Level: " + level + "\n"
                 + "Total HP: " + hp + "\n"
                 + "Classe de armadura: " + ac + "\n"
                 + "Movimento: " + speed + "\n"
-                + "Iniciativa: " + hp + "\n";
+                + "Iniciativa: " + initiative + "\n";
         return aux;
     }
 
@@ -65,7 +79,6 @@ public class Monstro extends Actor {
     public void setNotas(String notas) {
         this.notas = notas;
     }
-    
 
     private Atribute str = new Atribute();
     private Atribute dex = new Atribute();
@@ -88,46 +101,6 @@ public class Monstro extends Actor {
 
     public void setcLass(String cLass) {
         this.cLass = cLass;
-    }
-
-    public int getInitiative() {
-        return initiative;
-    }
-
-    public void setInitiative(int initiative) {
-        this.initiative = initiative;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getAc() {
-        return ac;
-    }
-
-    public void setAc(int ac) {
-        this.ac = ac;
-    }
-
-    public int getProficiency() {
-        return proficiency;
-    }
-
-    public void setProficiency(int proficiency) {
-        this.proficiency = proficiency;
     }
 
     public Atribute getStr() {
@@ -208,6 +181,49 @@ public class Monstro extends Actor {
 
     public void setHp(String hp) {
         this.hp = hp;
+    }
+
+    public String getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(String speed) {
+        this.speed = speed;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getAc() {
+        return ac;
+    }
+
+    public void setAc(String ac) {
+        this.ac = ac;
+    }
+
+    public String getProficiency() {
+        return proficiency;
+    }
+
+    public void setProficiency(String proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    @Override
+    public int compareTo(Actor o) {
+        if (Integer.parseInt(this.initiative) == Integer.parseInt(o.initiative)) {
+            return 0;
+        } else if (Integer.parseInt(this.initiative) > Integer.parseInt(o.initiative)) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
 }

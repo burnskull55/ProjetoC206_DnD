@@ -5,17 +5,58 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.Actor;
+import br.inatel.proj.Model.Chara;
+import br.inatel.proj.Model.Mesa;
+import br.inatel.proj.Model.Monstro;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author burns
  */
 public class TelaCombate extends javax.swing.JFrame {
 
+    private ArquivoMesas arquivo = new ArquivoMesas();
+    private Mesa mesa = new Mesa();//variavel mesa herdada da tela tela mesas
+    private ArrayList<Mesa> mesas = new ArrayList();
+    private ArrayList<Chara> chars = new ArrayList();
+    private ArrayList<Chara> aliados = new ArrayList();
+
+    private Chara achar = new Chara();
+    private ArrayList<Monstro> monstros = new ArrayList();
+    private ArrayList<Monstro> inimigos = new ArrayList();
+    private Monstro monstro = new Monstro();
+
+    private String userName;
+    private String mesaName;
+
+    private DefaultListModel dlm1 = new DefaultListModel();
+    private DefaultListModel dlm2 = new DefaultListModel();
+
+    private String turnos = "";
+
     /**
      * Creates new form TelaCombate
      */
     public TelaCombate() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.userName = ArquivoMesas.autor;
+        this.mesaName = ArquivoMesas.mesaName;
+
+        mesas = arquivo.ler();
+        findTable(ArquivoMesas.mesaName);
+
+        this.monstros = this.mesa.getMonstros();
+        this.chars = this.mesa.getCharacters();
+
+        listarPlayers();
+        listarMonsters();
     }
 
     /**
@@ -27,21 +68,188 @@ public class TelaCombate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txta_notas = new javax.swing.JTextArea();
+        btn_Voltar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txta_turnos = new javax.swing.JTextArea();
+        btn_orderTurn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList_chars = new javax.swing.JList<>();
+        btn_addToCombatplayer = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList_monsters = new javax.swing.JList<>();
+        btn_addToCombatMonster = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Notas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Sylfaen", 0, 18))); // NOI18N
+
+        txta_notas.setColumns(20);
+        txta_notas.setRows(5);
+        jScrollPane3.setViewportView(txta_notas);
+
+        btn_Voltar.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        btn_Voltar.setText("Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_Voltar)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Voltar)
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 510, 380));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Turno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Sylfaen", 0, 18))); // NOI18N
+
+        txta_turnos.setColumns(20);
+        txta_turnos.setRows(5);
+        jScrollPane1.setViewportView(txta_turnos);
+
+        btn_orderTurn.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        btn_orderTurn.setText("Ordenar Turno");
+        btn_orderTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderTurnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_orderTurn)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_orderTurn)
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 260, 380));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Jogadores & Monstros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Sylfaen", 0, 18))); // NOI18N
+
+        jList_chars.setModel(dlm1);
+        jScrollPane2.setViewportView(jList_chars);
+
+        btn_addToCombatplayer.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        btn_addToCombatplayer.setText("Adicionar");
+        btn_addToCombatplayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addToCombatplayerActionPerformed(evt);
+            }
+        });
+
+        jList_monsters.setModel(dlm2);
+        jScrollPane4.setViewportView(jList_monsters);
+
+        btn_addToCombatMonster.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        btn_addToCombatMonster.setText("Adicionar");
+        btn_addToCombatMonster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addToCombatMonsterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_addToCombatplayer)
+                    .addComponent(btn_addToCombatMonster))
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_addToCombatplayer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_addToCombatMonster)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 380));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/InlineR_Ampersand.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_addToCombatplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addToCombatplayerActionPerformed
+        addPlayer();
+    }//GEN-LAST:event_btn_addToCombatplayerActionPerformed
+
+    private void btn_addToCombatMonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addToCombatMonsterActionPerformed
+        addMonster();
+    }//GEN-LAST:event_btn_addToCombatMonsterActionPerformed
+
+    private void btn_orderTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderTurnActionPerformed
+        ordenarTurno();
+    }//GEN-LAST:event_btn_orderTurnActionPerformed
+
+    private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
+        voltar();
+    }//GEN-LAST:event_btn_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +287,165 @@ public class TelaCombate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Voltar;
+    private javax.swing.JButton btn_addToCombatMonster;
+    private javax.swing.JButton btn_addToCombatplayer;
+    private javax.swing.JButton btn_orderTurn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList_chars;
+    private javax.swing.JList<String> jList_monsters;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea txta_notas;
+    private javax.swing.JTextArea txta_turnos;
     // End of variables declaration//GEN-END:variables
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(aux)) {
+                this.mesa = mesa1;
+                find = true;
+
+            }
+        }
+        if (!find) {
+            System.out.println("wtf");
+        }
+    }
+
+    private void listarPlayers() {
+        dlm2.clear();
+        for (Chara aChar1 : this.chars) {
+            dlm1.addElement(aChar1.getNome());
+        }
+    }
+
+    private void listarMonsters() {
+        dlm2.clear();
+        for (Monstro monstro1 : monstros) {
+            dlm2.addElement(monstro1.getNome());
+        }
+    }
+
+    private void addPlayer() {
+        String aux;
+        aux = jList_chars.getSelectedValue();
+        if (aux != null) {
+            findPlayer(aux);
+            aux = aux + " iniciativa: " + this.achar.getInitiative() + "\n";
+            this.turnos = this.turnos + aux;
+            txta_turnos.setText(this.turnos);
+            this.aliados.add(this.achar);
+        } else {
+            System.out.println("nao encontrado player");
+        }
+    }
+
+    private void addMonster() {
+        String aux;
+        aux = jList_monsters.getSelectedValue();
+        if (aux != null) {
+            findMonster(aux);
+            aux = aux + " iniciativa: " + this.monstro.getInitiative() + "\n";
+            this.turnos = this.turnos + aux;
+            txta_turnos.setText(this.turnos);
+            this.inimigos.add(this.monstro);
+        } else {
+            System.out.println("nao encontrado monstro");
+        }
+    }
+
+    private void findPlayer(String aux) {
+        boolean find = false;
+        for (Chara aChar : chars) {
+            if (aChar.getNome().equals(aux)) {
+                this.achar = aChar;
+                find = true;
+            }
+        }
+        if (!find) {
+            System.out.println("findchar chamado , nao encontrado char");
+        }
+
+    }
+
+    private void voltar() {
+        String msg = "Deseja sair dessa tela ? "
+                + "As informaçoes do combate atual serão perdidas";
+        int op = JOptionPane.showConfirmDialog(jScrollPane1, msg, "Sair", JOptionPane.WARNING_MESSAGE);
+        if (op == 0) {
+            // OK: sair da tela
+            TelaControleMesa tela = new TelaControleMesa();
+            tela.setVisible(true);
+            this.dispose();
+
+        }
+    }
+
+    private void findMonster(String aux) {
+        boolean find = false;
+        for (Monstro monstro1 : this.monstros) {
+            if (monstro1.getNome().equals(aux)) {
+                this.monstro = monstro1;
+                find = true;
+
+            }
+        }
+        if (!find) {
+            System.out.println("find monstro chamado , nao encontrado monstro");
+        }
+    }
+
+    private void ordenarTurno() {
+        ArrayList<Actor> combatentes = new ArrayList();
+        Collections.sort(this.aliados);
+        String auxaliados = "";
+        Collections.sort(this.inimigos);
+        String auxinimigos = "";
+        this.turnos = "";
+
+        for (Chara aliado : this.aliados) {
+            String aux = (String) JOptionPane.showInputDialog("entre com o roll do :" + aliado.getNome());
+
+            int inic = Integer.parseInt(aux);
+            int inib = Integer.parseInt(aliado.getInitiative());
+
+            auxaliados = auxaliados + aliado.getNome() + " :" + (inic + inib + "") + "\n";
+            aliado.setInitiative((inic + inib) + "");
+            combatentes.add(aliado);
+        }
+
+        for (Monstro monstro : this.inimigos) {
+            String aux = (String) JOptionPane.showInputDialog("entre com o roll do :" + monstro.getNome());
+            int inic = Integer.parseInt(aux);
+            int inib = Integer.parseInt(monstro.getInitiative());
+
+            auxinimigos = auxinimigos + monstro.getNome() + " :" + (inic + inib + "") + "\n";
+            monstro.setInitiative((inic + inib) + "");
+            combatentes.add(monstro);
+        }
+        Collections.sort(combatentes);
+        for (Actor combatente : combatentes) {
+            if (combatente instanceof Chara) {
+                Chara aux = new Chara();
+                aux = (Chara) combatente;
+                this.turnos = this.turnos + aux.getNome() + " " + aux.getInitiative() + "\n";
+            }
+            if (combatente instanceof Monstro) {
+                Monstro aux = new Monstro();
+                aux = (Monstro) combatente;
+                this.turnos = this.turnos + aux.getNome() + " " + aux.getInitiative() + "\n";
+            }
+
+        }
+        txta_turnos.setText(turnos);
+
+    }
 }

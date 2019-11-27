@@ -544,7 +544,7 @@ public class TelaAddChar extends javax.swing.JFrame {
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 510, 380));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/InlineR_Ampersand.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/InlineR_Ampersand.jpg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 400));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

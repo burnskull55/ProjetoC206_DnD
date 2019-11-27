@@ -5,17 +5,47 @@
  */
 package br.inatel.proj.View;
 
+import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.Mesa;
+import br.inatel.proj.Model.Monstro;
+import br.inatel.proj.Model.Npc;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author burns
  */
 public class TelaNpc extends javax.swing.JFrame {
 
+    private ArquivoMesas arquivo = new ArquivoMesas();
+    private Mesa mesa = new Mesa();
+    private ArrayList<Mesa> mesas = new ArrayList();
+    private Npc npc = new Npc();
+    private ArrayList<Npc> npcs = new ArrayList();
+    private DefaultListModel dlm = new DefaultListModel();
+    private String userName;
+    private String mesaName;
+    private int index;
+
     /**
      * Creates new form TelaNpc
      */
     public TelaNpc() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_shownpc);
+
+        this.userName = ArquivoMesas.autor;
+        this.mesaName = ArquivoMesas.mesaName;
+        this.mesas = arquivo.ler();
+        findTable(ArquivoMesas.mesaName);
+
+        this.index = this.mesas.indexOf(this.mesa);
+        this.npcs = this.mesa.getNpcs();
+        ArquivoMesas.npc = this.npc;
+        listar();
     }
 
     /**
@@ -27,21 +57,130 @@ public class TelaNpc extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txta_interface = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_npcs = new javax.swing.JList<>();
+        lbl_personagens = new javax.swing.JLabel();
+        btn_shownpc = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
+        btn_excluir = new javax.swing.JButton();
+        btn_showNotes = new javax.swing.JButton();
+        btn_Addnpc = new javax.swing.JButton();
+        btn_voltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txta_interface.setColumns(20);
+        txta_interface.setRows(5);
+        jScrollPane2.setViewportView(txta_interface);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 224, 280));
+
+        jList_npcs.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_npcs.setModel(dlm
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jScrollPane1.setViewportView(jList_npcs);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 190, 110));
+
+        lbl_personagens.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_personagens.setFont(new java.awt.Font("Sylfaen", 0, 24)); // NOI18N
+        lbl_personagens.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_personagens.setText("NPC'S");
+        jPanel1.add(lbl_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 228, -1));
+
+        btn_shownpc.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_shownpc.setText("Info");
+        btn_shownpc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_shownpcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_shownpc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 140, 30));
+
+        btn_editar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        btn_excluir.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_excluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        btn_showNotes.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_showNotes.setText("Notas");
+        btn_showNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_showNotesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_showNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 140, 30));
+
+        btn_Addnpc.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_Addnpc.setText("Adicionar Npc");
+        btn_Addnpc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AddnpcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_Addnpc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/proj/Imagens/Dungeons_and_Dragons_4th_Edition_Logo-600x400.jpg"))); // NOI18N
+        jLabel1.setToolTipText("");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 360));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_shownpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_shownpcActionPerformed
+        showGeral();
+    }//GEN-LAST:event_btn_shownpcActionPerformed
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        editar();
+    }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        exluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_showNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showNotesActionPerformed
+        showNotas();
+    }//GEN-LAST:event_btn_showNotesActionPerformed
+
+    private void btn_AddnpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddnpcActionPerformed
+        callAddNpc();
+    }//GEN-LAST:event_btn_AddnpcActionPerformed
+
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        voltar();
+    }//GEN-LAST:event_btn_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +218,134 @@ public class TelaNpc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Addnpc;
+    private javax.swing.JButton btn_editar;
+    private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_showNotes;
+    private javax.swing.JButton btn_shownpc;
+    private javax.swing.JButton btn_voltar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList_npcs;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_personagens;
+    private javax.swing.JTextArea txta_interface;
     // End of variables declaration//GEN-END:variables
+
+    private void showGeral() {
+        if (findNpc()) {
+            txta_interface.setText(this.npc.showNpc());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Npc não encontrado");
+        }
+    }
+
+    private void editar() {
+        String aux = jList_npcs.getSelectedValue();
+        if (findNpc()) {
+            if (aux != null) {
+                ArquivoMesas.npc = this.npc;
+                ArquivoMesas.isEdit = true;
+                TelaAddNpc tela = new TelaAddNpc();
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Não ha Npcs ainda");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Npc não encontrado");
+        }
+
+    }
+
+    private void exluir() {
+        String aux = jList_npcs.getSelectedValue();
+
+        if (aux != null) {
+            for (Npc npc1 : this.npcs) {
+                if (npc1.getNome().equals(aux)) {
+                    int indexAux = this.npcs.indexOf(npc1);
+                    String msg = "Deseja remover o Npc: " + npc1.getNome() + "?";
+
+                    int op = JOptionPane.showConfirmDialog(jScrollPane1, msg, "Excluir", JOptionPane.WARNING_MESSAGE);
+                    if (op == 0) {
+                        // OK: excluir o npc
+                        JOptionPane.showMessageDialog(jScrollPane1, "Npc Removido com Sucesso!");
+                        this.npcs.remove(indexAux);
+                        this.mesa.setNpcs(this.npcs);
+                        this.mesas.set(this.index, this.mesa);
+                        arquivo.salvarArquivo(mesas);
+                        listar();
+                        index = 0;
+                        break;
+                    }
+
+                }
+            }
+
+            listar();
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "não ha Npcs ainda", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void showNotas() {
+        if (findNpc()) {
+            txta_interface.setText(this.npc.getNotas());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Npc não encontrado");
+        }
+    }
+
+    private void voltar() {
+        TelaControleMesa tela = new TelaControleMesa();
+        tela.setVisible(true);
+        this.dispose();
+    }
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(aux)) {
+                this.mesa = mesa1;
+                find = true;
+
+            }
+        }
+        if (!find) {
+            System.out.println("wtf");
+        }
+    }
+
+    private void listar() {
+        dlm.clear();
+        for (Npc npc1 : npcs) {
+            dlm.addElement(npc1.getNome());
+        }
+    }
+
+    private void callAddNpc() {
+        TelaAddNpc tela = new TelaAddNpc();
+        tela.setVisible(true);
+        this.dispose();
+    }
+
+    private boolean findNpc() {
+        String aux = jList_npcs.getSelectedValue();
+        boolean find = false;
+        for (Npc npc1 : this.npcs) {
+            if (npc1.getNome().equals(aux)) {
+                this.npc = npc1;
+                find = true;
+                return find;
+
+            }
+        }
+        if (!find) {
+            System.out.println("find npc chamado , nao encontrado npc");
+        }
+        return find;
+    }
 }

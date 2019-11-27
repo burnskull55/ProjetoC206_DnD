@@ -11,10 +11,9 @@ import java.io.Serializable;
  *
  * @author burns
  */
-public class Chara extends Actor implements Serializable, Comparable<Chara> {
+public class Chara extends Actor implements Serializable {
 
     private String classe;
-    private String initiative;
     private String speed;
     private String level;
     private String ac;
@@ -47,7 +46,6 @@ public class Chara extends Actor implements Serializable, Comparable<Chara> {
         this.silverP = "";
         this.notas = "";
     }
-    
 
     public String showChar() {
         String aux = "Char: " + nome + "\n"
@@ -64,7 +62,9 @@ public class Chara extends Actor implements Serializable, Comparable<Chara> {
         String aux = "Iniciative: " + initiative + "\n"
                 + "Speed: " + speed + "\n"
                 + "Armor Class: " + ac + "\n"
-                + "Proficiency: " + proficiency + "\n";
+                + "Proficiency: " + proficiency + "\n"
+                + "Itens: " + inventario.getInv();
+
         return aux;
     }
 
@@ -264,8 +264,14 @@ public class Chara extends Actor implements Serializable, Comparable<Chara> {
     }
 
     @Override
-    public int compareTo(Chara o) {
-        return this.getClasse().compareTo(o.getClasse());
+    public int compareTo(Actor o) {
+        if (Integer.parseInt(this.initiative) == Integer.parseInt(o.initiative)) {
+            return 0;
+        } else if (Integer.parseInt(this.initiative) > Integer.parseInt(o.initiative)) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
 }
