@@ -39,6 +39,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
         lbl_charcounter1.setText(this.mesa.getCharacters().size() + "");
         lbl_monstercounter.setText(this.mesa.getMonstros().size() + "");
         lbl_npcounter.setText(this.mesa.getNpcs().size() + "");
+        this.lbl_mesan.setText(this.mesaName);
     }
 
     /**
@@ -51,6 +52,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private void initComponents() {
 
         jp_mesaph = new javax.swing.JPanel();
+        lbl_mesan = new javax.swing.JLabel();
         btn_personagens = new javax.swing.JButton();
         btn_monstros = new javax.swing.JButton();
         btn_npcs = new javax.swing.JButton();
@@ -64,6 +66,12 @@ public class TelaControleMesa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jp_mesaph.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_mesan.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_mesan.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_mesan.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_mesan.setText("mesa name");
+        jp_mesaph.add(lbl_mesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, 50));
 
         btn_personagens.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_personagens.setText("Personagens");
@@ -101,17 +109,23 @@ public class TelaControleMesa extends javax.swing.JFrame {
         });
         jp_mesaph.add(btn_combate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
+        lbl_npcounter.setBackground(new java.awt.Color(0, 0, 0));
         lbl_npcounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_npcounter.setForeground(new java.awt.Color(255, 255, 255));
         lbl_npcounter.setText("npc counter");
-        jp_mesaph.add(lbl_npcounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 60, 30));
+        jp_mesaph.add(lbl_npcounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 60, 30));
 
+        lbl_charcounter1.setBackground(new java.awt.Color(0, 0, 0));
         lbl_charcounter1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_charcounter1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_charcounter1.setText("player counter");
         jp_mesaph.add(lbl_charcounter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 105, 70, 30));
 
+        lbl_monstercounter.setBackground(new java.awt.Color(0, 0, 0));
         lbl_monstercounter.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        lbl_monstercounter.setForeground(new java.awt.Color(255, 255, 255));
         lbl_monstercounter.setText("monster counter");
-        jp_mesaph.add(lbl_monstercounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 90, 30));
+        jp_mesaph.add(lbl_monstercounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 90, 30));
 
         btn_voltar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_voltar.setText("Voltar");
@@ -203,6 +217,7 @@ public class TelaControleMesa extends javax.swing.JFrame {
     private javax.swing.JPanel jp_mesaph;
     private javax.swing.JLabel lbl_charcounter1;
     private javax.swing.JLabel lbl_imagem;
+    private javax.swing.JLabel lbl_mesan;
     private javax.swing.JLabel lbl_monstercounter;
     private javax.swing.JLabel lbl_npcounter;
     // End of variables declaration//GEN-END:variables
@@ -218,7 +233,9 @@ public class TelaControleMesa extends javax.swing.JFrame {
     }
 
     private void callMonster() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       TelaMonstros tela = new TelaMonstros();
+       tela.setVisible(true);
+       this.dispose();
     }
 
     private void callCombat() {

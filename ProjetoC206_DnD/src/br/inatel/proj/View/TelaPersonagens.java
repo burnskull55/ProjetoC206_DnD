@@ -44,6 +44,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
 
         this.mesas = arquivo.ler();
         findTable(ArquivoMesas.mesaName);
+        
         this.index = this.mesas.indexOf(this.mesa);
         this.chars = this.mesa.getCharacters();
         ArquivoMesas.character = this.achar;
@@ -63,6 +64,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btn_showNotes = new javax.swing.JButton();
         btn_Addchar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_chars = new javax.swing.JList<>();
@@ -81,6 +83,15 @@ public class TelaPersonagens extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_showNotes.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_showNotes.setText("Notas");
+        btn_showNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_showNotesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_showNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 140, 30));
 
         btn_Addchar.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         btn_Addchar.setText("Adicionar Personagem");
@@ -198,6 +209,10 @@ public class TelaPersonagens extends javax.swing.JFrame {
         exluir();
     }//GEN-LAST:event_btn_excluirActionPerformed
 
+    private void btn_showNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showNotesActionPerformed
+        showNotas();
+    }//GEN-LAST:event_btn_showNotesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +255,7 @@ public class TelaPersonagens extends javax.swing.JFrame {
     private javax.swing.JButton btn_showAtributes;
     private javax.swing.JButton btn_showChar;
     private javax.swing.JButton btn_showCombat;
+    private javax.swing.JButton btn_showNotes;
     private javax.swing.JButton btn_voltar;
     private javax.swing.JList<String> jList_chars;
     private javax.swing.JPanel jPanel1;
@@ -374,6 +390,14 @@ public class TelaPersonagens extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "nao ha personagens ainda", "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    private void showNotas() {
+        if (findChar()) {
+            txta_interface.setText(this.achar.getNotas());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "char nao encontrado");
+        }
     }
 
 }

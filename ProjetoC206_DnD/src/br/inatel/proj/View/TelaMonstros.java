@@ -6,8 +6,12 @@
 package br.inatel.proj.View;
 
 import br.inatel.proj.Controller.ArquivoMesas;
+import br.inatel.proj.Model.Chara;
 import br.inatel.proj.Model.Mesa;
+import br.inatel.proj.Model.Monstro;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,12 +22,31 @@ public class TelaMonstros extends javax.swing.JFrame {
     private ArquivoMesas arquivo = new ArquivoMesas();
     private Mesa mesa = new Mesa();
     private ArrayList<Mesa> mesas = new ArrayList();
-    
+    private ArrayList<Monstro> monstros = new ArrayList();
+    private Monstro monstro = new Monstro();
+    private DefaultListModel dlm = new DefaultListModel();
+    private String userName;
+    private String mesaName;
+    private int index;
+
     /**
      * Creates new form TelaMonstros
      */
     public TelaMonstros() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btn_showMonstro);
+        this.userName = ArquivoMesas.autor;
+        this.mesaName = ArquivoMesas.mesaName;
+        this.mesas = arquivo.ler();
+        findTable(ArquivoMesas.mesaName);
+
+        this.index = this.mesas.indexOf(this.mesa);
+        this.monstros = this.mesa.getMonstros();
+        ArquivoMesas.monstro = this.monstro;
+
+        listar();
+
     }
 
     /**
@@ -36,9 +59,10 @@ public class TelaMonstros extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btn_showNotes = new javax.swing.JButton();
         lbl_personagens = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList_chars = new javax.swing.JList<>();
+        jList_monsters = new javax.swing.JList<>();
         btn_editar = new javax.swing.JButton();
         btn_excluir = new javax.swing.JButton();
         btn_showMonstro = new javax.swing.JButton();
@@ -52,14 +76,23 @@ public class TelaMonstros extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_showNotes.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        btn_showNotes.setText("Notas");
+        btn_showNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_showNotesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_showNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 140, 30));
+
         lbl_personagens.setFont(new java.awt.Font("Sylfaen", 0, 24)); // NOI18N
         lbl_personagens.setText("Monstros");
         jPanel1.add(lbl_personagens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 228, -1));
 
-        jList_chars.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jList_chars.setModel(dlm
+        jList_monsters.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jList_monsters.setModel(dlm
         );
-        jScrollPane1.setViewportView(jList_chars);
+        jScrollPane1.setViewportView(jList_monsters);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 190, 110));
 
@@ -144,12 +177,16 @@ public class TelaMonstros extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_showMonstroActionPerformed
 
     private void btn_AddMonstroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddMonstroActionPerformed
-        callAddChar();
+        callAddMonstro();
     }//GEN-LAST:event_btn_AddMonstroActionPerformed
 
     private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
         voltar();
     }//GEN-LAST:event_btn_voltarActionPerformed
+
+    private void btn_showNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showNotesActionPerformed
+        showNotas();
+    }//GEN-LAST:event_btn_showNotesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,9 +228,10 @@ public class TelaMonstros extends javax.swing.JFrame {
     private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_showMonstro;
+    private javax.swing.JButton btn_showNotes;
     private javax.swing.JButton btn_voltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList_chars;
+    private javax.swing.JList<String> jList_monsters;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -202,30 +240,117 @@ public class TelaMonstros extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void editar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String aux = jList_monsters.getSelectedValue();
+        if (findMonster()) {
+            if (aux != null) {
+                ArquivoMesas.monstro = this.monstro;
+                ArquivoMesas.isEdit = true;
+                TelaAddMonstro tela = new TelaAddMonstro();
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "nao ha monstros ainda");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Monstro nao encontrado");
+        }
+
     }
 
     private void exluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String aux = jList_monsters.getSelectedValue();
+
+        if (aux != null) {
+            for (Monstro monstro1 : this.monstros) {
+                if (monstro1.getNome().equals(aux)) {
+                    int indexAux = this.monstros.indexOf(monstro1);
+                    String msg = "Deseja remover o monstro: " + monstro1.getNome() + "?";
+
+                    int op = JOptionPane.showConfirmDialog(jScrollPane1, msg, "Excluir", JOptionPane.WARNING_MESSAGE);
+                    if (op == 0) {
+                        // OK: excluir o char
+                        JOptionPane.showMessageDialog(jScrollPane1, "Monstro Removido com Sucesso!");
+                        this.monstros.remove(indexAux);
+                        this.mesa.setMonstros(monstros);
+                        this.mesas.set(this.index, this.mesa);
+                        arquivo.salvarArquivo(mesas);
+                        listar();
+                        index = 0;
+                        break;
+                    }
+
+                }
+            }
+
+            listar();
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "nao ha monstros ainda", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void showGeral() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void showCombate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void showAtributos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void callAddChar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (findMonster()) {
+            txta_interface.setText(this.monstro.showMonstro());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "monstro nao encontrado");
+        }
     }
 
     private void voltar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TelaControleMesa tela = new TelaControleMesa();
+        tela.setVisible(true);
+        this.dispose();
     }
+
+    private void findTable(String aux) {
+        boolean find = false;
+        for (Mesa mesa1 : mesas) {
+            if (mesa1.getNome().equals(aux)) {
+                this.mesa = mesa1;
+                find = true;
+
+            }
+        }
+        if (!find) {
+            System.out.println("wtf");
+        }
+    }
+
+    private void listar() {
+        dlm.clear();
+        for (Monstro monstro1 : monstros) {
+            dlm.addElement(monstro1.getNome());
+        }
+    }
+
+    private void callAddMonstro() {
+        TelaAddMonstro tela = new TelaAddMonstro();
+        tela.setVisible(true);
+        this.dispose();
+    }
+
+    private boolean findMonster() {
+        String aux = jList_monsters.getSelectedValue();
+        boolean find = false;
+        for (Monstro monstro1 : monstros) {
+            if (monstro1.getNome().equals(aux)) {
+                this.monstro = monstro1;
+                find = true;
+                return find;
+
+            }
+        }
+        if (!find) {
+            System.out.println("find monstro chamado , nao encontrado monstro");
+        }
+        return find;
+    }
+
+    private void showNotas() {
+if (findMonster()) {
+            txta_interface.setText(this.monstro.getNotas());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "monstro nao encontrado");
+        }    }
 }

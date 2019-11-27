@@ -17,6 +17,55 @@ public class Monstro extends Actor {
     private int level;
     private int ac;
     private int proficiency;
+    private String spellDc;
+    private String spellatk;
+    private String spells;
+    private String notas;
+    
+    
+    public String showMonstro(){
+        String aux = "Monstro: " + nome + "\n"
+                + "Raça: " + race + "\n"
+                + "Level: " + level + "\n"
+                + "Total HP: " + hp + "\n"
+                + "Classe de armadura: " + ac + "\n"
+                + "Movimento: " + speed + "\n"
+                + "Iniciativa: " + hp + "\n";
+        return aux;
+    }
+
+    public String getSpellDc() {
+        return spellDc;
+    }
+
+    public void setSpellDc(String spellDc) {
+        this.spellDc = spellDc;
+    }
+
+    public String getSpellatk() {
+        return spellatk;
+    }
+
+    public void setSpellatk(String spellatk) {
+        this.spellatk = spellatk;
+    }
+
+    public String getSpells() {
+        return spells;
+    }
+
+    public void setSpells(String spells) {
+        this.spells = spells;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+    
 
     private Atribute str = new Atribute();
     private Atribute dex = new Atribute();
